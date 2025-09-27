@@ -1,9 +1,11 @@
-// app/page.tsx
-
+import Hero from '../components/Hero';
+import Header from '../components/Header';
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative">
+      <Header />
+      <Hero />
     </main>
   );
 }
