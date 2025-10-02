@@ -1,17 +1,18 @@
 'use client';
 import React, { useEffect, useState, useRef } from "react";
-import { Play, Pause, Star, ArrowRight, Sparkles, TrendingUp, Users, Globe2, ChevronLeft, ChevronRight, Zap, Shield, Clock } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Play, Pause, Star, ArrowRight, Sparkles, TrendingUp, Users, Globe2, ChevronLeft, ChevronRight, Zap, Shield, Clock, Award, CheckCircle, Rocket } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from 'framer-motion';
 
-// Enhanced Particle Animation Component
+// Enhanced Particle Animation Component with more variety
 const ParticleField = () => {
-  const particles = Array.from({ length: 80 }, (_, i) => ({
+  const particles = Array.from({ length: 100 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    delay: Math.random() * 4,
-    duration: 4 + Math.random() * 3,
-    size: Math.random() * 3 + 1,
+    delay: Math.random() * 5,
+    duration: 3 + Math.random() * 4,
+    size: Math.random() * 4 + 1,
+    type: Math.random() > 0.7 ? 'star' : 'circle',
   }));
 
   return (
@@ -19,7 +20,7 @@ const ParticleField = () => {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute bg-blue-400/20 rounded-full"
+          className={`absolute ${particle.type === 'star' ? 'bg-yellow-400/30' : 'bg-blue-400/20'} ${particle.type === 'star' ? 'rotate-45' : 'rounded-full'}`}
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -27,9 +28,10 @@ const ParticleField = () => {
             height: `${particle.size}px`,
           }}
           animate={{
-            y: [0, -200, 0],
-            opacity: [0, 0.8, 0],
-            scale: [0, 1.2, 0],
+            y: [0, -250, 0],
+            opacity: [0, 1, 0],
+            scale: [0, 1.5, 0],
+            rotate: particle.type === 'star' ? [45, 225, 45] : 0,
           }}
           transition={{
             duration: particle.duration,
@@ -43,7 +45,39 @@ const ParticleField = () => {
   );
 };
 
-// Image Slider Component
+// Animated Background Gradient
+const AnimatedGradient = () => {
+  return (
+    <div className="absolute inset-0 opacity-30">
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-blue-600/40 via-purple-600/40 to-pink-600/40"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 90, 0],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-tr from-cyan-600/30 via-blue-600/30 to-purple-600/30"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          rotate: [90, 0, 90],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+    </div>
+  );
+};
+
+// Enhanced Image Slider with Ken Burns effect
 const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   
@@ -59,18 +93,22 @@ const ImageSlider = () => {
     {
       src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       alt: "City skyline at sunset"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      alt: "Sunset over water"
     }
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 6000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
 
@@ -88,48 +126,54 @@ const ImageSlider = () => {
         <motion.div
           key={currentIndex}
           className="absolute inset-0 w-full h-full"
-          initial={{ opacity: 0, scale: 1.1 }}
+          initial={{ opacity: 0, scale: 1.2 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          exit={{ opacity: 0, scale: 1.1 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
         >
-          <img
+          <motion.img
             src={images[currentIndex].src}
             alt={images[currentIndex].alt}
             className="w-full h-full object-cover"
+            animate={{ scale: [1, 1.1] }}
+            transition={{ duration: 7, ease: "linear" }}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Subtle overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40" />
+      {/* Enhanced overlay with animated gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60" />
+      <AnimatedGradient />
 
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 group border border-white/20"
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 group border border-white/30 hover:scale-110"
+        aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        <ChevronLeft className="w-7 h-7 text-white group-hover:scale-110 transition-transform" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 group border border-white/20"
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 group border border-white/30 hover:scale-110"
+        aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        <ChevronRight className="w-7 h-7 text-white group-hover:scale-110 transition-transform" />
       </button>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 right-8 z-30 flex gap-3">
+      {/* Enhanced Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3 bg-black/20 backdrop-blur-md px-4 py-3 rounded-full border border-white/10">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`transition-all duration-300 ${
               index === currentIndex 
-                ? 'bg-white scale-125' 
-                : 'bg-white/40 hover:bg-white/60'
+                ? 'w-8 h-3 bg-white rounded-full' 
+                : 'w-3 h-3 bg-white/40 hover:bg-white/60 rounded-full'
             }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
@@ -137,14 +181,88 @@ const ImageSlider = () => {
   );
 };
 
+// Live Metrics Component
+const LiveMetrics = () => {
+  const [bookings, setBookings] = useState(2847);
+  const [activeUsers, setActiveUsers] = useState(1234);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBookings(prev => prev + Math.floor(Math.random() * 3));
+      setActiveUsers(prev => prev + Math.floor(Math.random() * 5) - 2);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div
+      className="absolute top-32 right-8 z-20 bg-black/40 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hidden xl:block"
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1, delay: 2 }}
+    >
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+        <span className="text-white font-semibold text-sm">Live Now</span>
+      </div>
+      <div className="space-y-3">
+        <div>
+          <div className="text-gray-400 text-xs mb-1">Today's Bookings</div>
+          <div className="text-white text-2xl font-bold">{bookings.toLocaleString()}</div>
+        </div>
+        <div>
+          <div className="text-gray-400 text-xs mb-1">Active Users</div>
+          <div className="text-white text-2xl font-bold">{activeUsers.toLocaleString()}</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Trust Badges Component
+const TrustBadges = () => {
+  const badges = [
+    { icon: Shield, text: "Enterprise Security" },
+    { icon: Award, text: "ISO Certified" },
+    { icon: CheckCircle, text: "99.99% Uptime" },
+    { icon: Zap, text: "Lightning Fast" },
+  ];
+
+  return (
+    <motion.div
+      className="flex flex-wrap items-center justify-center gap-6 mt-12"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 1.5 }}
+    >
+      {badges.map((badge, idx) => (
+        <motion.div
+          key={idx}
+          className="flex items-center gap-2 bg-white/5 backdrop-blur-xl px-6 py-3 rounded-full border border-white/10"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.7 + idx * 0.1 }}
+          whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.3)" }}
+        >
+          <badge.icon className="w-5 h-5 text-blue-400" />
+          <span className="text-white text-sm font-medium">{badge.text}</span>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+};
+
 // Enhanced Software Preview Component
 const SoftwarePreview = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   
   const tabs = [
     { id: 'dashboard', name: 'AI Dashboard', icon: TrendingUp },
     { id: 'bookings', name: 'Smart Bookings', icon: Users },
-    { id: 'analytics', name: 'Insights', icon: Globe2 }
+    { id: 'analytics', name: 'Analytics', icon: Globe2 }
   ];
 
   const renderTabContent = () => {
@@ -176,20 +294,23 @@ const SoftwarePreview = () => {
               ].map((metric, idx) => (
                 <motion.div
                   key={idx}
-                  className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-6 border border-gray-700/30 backdrop-blur-sm"
+                  className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-6 border border-gray-700/30 backdrop-blur-sm relative overflow-hidden group"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   whileHover={{ scale: 1.02, y: -5 }}
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 bg-${metric.color}-500/10 rounded-xl flex items-center justify-center border border-${metric.color}-500/20`}>
-                      <metric.icon className={`w-6 h-6 text-${metric.color}-400`} />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`w-12 h-12 bg-gradient-to-br from-${metric.color}-500/20 to-${metric.color}-600/20 rounded-xl flex items-center justify-center border border-${metric.color}-500/20`}>
+                        <metric.icon className={`w-6 h-6 text-${metric.color}-400`} />
+                      </div>
+                      <div className={`text-${metric.color}-400 text-sm font-medium`}>{metric.change}</div>
                     </div>
-                    <div className={`text-${metric.color}-400 text-sm font-medium`}>{metric.change}</div>
+                    <div className="text-gray-400 text-sm mb-1">{metric.label}</div>
+                    <div className="text-3xl font-bold text-white">{metric.value}</div>
                   </div>
-                  <div className="text-gray-400 text-sm mb-1">{metric.label}</div>
-                  <div className="text-3xl font-bold text-white">{metric.value}</div>
                 </motion.div>
               ))}
             </div>
@@ -198,14 +319,27 @@ const SoftwarePreview = () => {
               <div className="flex items-center justify-between mb-6">
                 <h4 className="text-lg font-semibold text-white">AI Performance Analytics</h4>
                 <div className="flex gap-2">
-                  <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  {['blue', 'purple', 'green'].map((color, idx) => (
+                    <motion.div
+                      key={idx}
+                      className={`w-3 h-3 bg-${color}-400 rounded-full`}
+                      animate={{ scale: [1, 1.3, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: idx * 0.3 }}
+                    />
+                  ))}
                 </div>
               </div>
-              <div className="h-32 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-xl flex items-center justify-center relative overflow-hidden border border-white/5">
+              <div className="h-40 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-xl flex items-end justify-between p-4 relative overflow-hidden border border-white/5">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-purple-500/10"></div>
-                <div className="text-gray-400 text-sm">Real-time Analytics Visualization</div>
+                {Array.from({ length: 12 }).map((_, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="w-8 bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-lg relative z-10"
+                    initial={{ height: 0 }}
+                    animate={{ height: `${Math.random() * 80 + 20}%` }}
+                    transition={{ duration: 1, delay: idx * 0.1, repeat: Infinity, repeatDelay: 5 }}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -222,23 +356,27 @@ const SoftwarePreview = () => {
             {[1,2,3,4].map((_, idx) => (
               <motion.div
                 key={idx}
-                className="flex items-center justify-between bg-gradient-to-r from-gray-800/40 to-gray-900/40 rounded-2xl p-6 border border-gray-700/30 backdrop-blur-sm"
+                className="flex items-center justify-between bg-gradient-to-r from-gray-800/40 to-gray-900/40 rounded-2xl p-6 border border-gray-700/30 backdrop-blur-sm group relative overflow-hidden"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 whileHover={{ scale: 1.02, x: 5 }}
               >
-                <div className="flex items-center gap-4">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="flex items-center gap-4 relative z-10">
                   <div className="w-14 h-14 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-blue-500/20">
                     <Users className="w-7 h-7 text-blue-400" />
                   </div>
                   <div>
                     <div className="text-white font-semibold text-lg">Luxury Resort Booking #{2840 + idx}</div>
                     <div className="text-gray-400">4 guests • 5 nights • Premium Suite</div>
-                    <div className="text-green-400 text-sm font-medium mt-1">✓ AI-Optimized Price</div>
+                    <div className="text-green-400 text-sm font-medium mt-1 flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4" />
+                      AI-Optimized Price
+                    </div>
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right relative z-10">
                   <div className="text-green-400 font-bold text-xl">${850 + idx * 50}</div>
                   <div className="text-gray-400 text-sm">per night</div>
                 </div>
@@ -248,19 +386,29 @@ const SoftwarePreview = () => {
         );
       default:
         return (
-          <div className="p-8 text-center space-y-6">
-            <h3 className="text-2xl font-bold text-white">Advanced Analytics</h3>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="p-8 space-y-6">
+            <h3 className="text-2xl font-bold text-white text-center">Advanced Analytics</h3>
+            <div className="grid grid-cols-2 gap-6">
               {[
-                { label: "Customer Satisfaction", value: "98.5%" },
-                { label: "Conversion Rate", value: "24.3%" },
-                { label: "Average Response", value: "0.3s" },
-                { label: "Global Reach", value: "150+" }
+                { label: "Customer Satisfaction", value: "98.5%", icon: Star },
+                { label: "Conversion Rate", value: "24.3%", icon: TrendingUp },
+                { label: "Average Response", value: "0.3s", icon: Zap },
+                { label: "Global Reach", value: "150+", icon: Globe2 }
               ].map((item, idx) => (
-                <div key={idx} className="bg-gray-800/40 rounded-xl p-4 border border-gray-700/30">
-                  <div className="text-2xl font-bold text-white">{item.value}</div>
+                <motion.div
+                  key={idx}
+                  className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 rounded-xl p-6 border border-gray-700/30 text-center group"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-blue-500/20">
+                    <item.icon className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <div className="text-3xl font-bold text-white mb-2">{item.value}</div>
                   <div className="text-gray-400 text-sm">{item.label}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -270,29 +418,51 @@ const SoftwarePreview = () => {
 
   return (
     <motion.div 
-      className="relative max-w-6xl mx-auto mt-20"
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 1.2 }}
+      ref={ref}
+      className="relative max-w-6xl mx-auto mt-24"
+      initial={{ opacity: 0, y: 80 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1, delay: 0.3 }}
     >
       <div className="relative">
         {/* Enhanced Glow Effect */}
-        <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl blur-3xl opacity-80"></div>
+        <motion.div
+          className="absolute -inset-12 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-3xl"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
         
         {/* Main Software Preview */}
         <div className="relative bg-gray-900/95 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
           {/* Enhanced Browser Header */}
           <div className="bg-gradient-to-r from-gray-800/95 to-gray-900/95 px-8 py-5 flex items-center gap-6 border-b border-gray-700/30">
             <div className="flex gap-3">
-              <div className="w-4 h-4 bg-red-500 rounded-full shadow-lg"></div>
-              <div className="w-4 h-4 bg-yellow-500 rounded-full shadow-lg"></div>
-              <div className="w-4 h-4 bg-green-500 rounded-full shadow-lg"></div>
+              {['red', 'yellow', 'green'].map((color, idx) => (
+                <motion.div
+                  key={color}
+                  className={`w-4 h-4 bg-${color}-500 rounded-full shadow-lg cursor-pointer`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                />
+              ))}
             </div>
             <div className="flex-1 bg-gray-700/30 rounded-xl px-6 py-3 text-sm text-gray-300 flex items-center gap-3 border border-gray-600/30">
               <div className="w-5 h-5 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center">
                 <Shield className="w-3 h-3 text-white" />
               </div>
               <span className="font-medium">app.foxes.ai/dashboard</span>
+              <motion.div
+                className="ml-auto w-2 h-2 bg-green-400 rounded-full"
+                animate={{ opacity: [1, 0.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
             </div>
             <div className="flex items-center gap-3">
               <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -322,6 +492,14 @@ const SoftwarePreview = () => {
                 )}
                 <tab.icon className="w-5 h-5" />
                 {tab.name}
+                {activeTab === tab.id && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
               </motion.button>
             ))}
           </div>
@@ -343,22 +521,24 @@ const SoftwarePreview = () => {
       
       {/* Enhanced Floating Elements */}
       <motion.div 
-        className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-500/15 to-purple-500/15 rounded-full blur-2xl"
+        className="absolute -top-12 -right-12 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
         animate={{ 
-          y: [-20, 20, -20],
+          y: [-30, 30, -30],
+          x: [-15, 15, -15],
           rotate: [0, 180, 360],
-          scale: [1, 1.1, 1]
+          scale: [1, 1.2, 1]
         }}
-        transition={{ duration: 8, repeat: Infinity }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute -bottom-8 -left-8 w-28 h-28 bg-gradient-to-br from-purple-500/15 to-pink-500/15 rounded-full blur-2xl"
+        className="absolute -bottom-12 -left-12 w-36 h-36 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
         animate={{ 
-          y: [20, -20, 20],
+          y: [30, -30, 30],
+          x: [15, -15, 15],
           rotate: [360, 180, 0],
-          scale: [1.1, 1, 1.1]
+          scale: [1.2, 1, 1.2]
         }}
-        transition={{ duration: 6, repeat: Infinity }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
     </motion.div>
   );
@@ -366,6 +546,9 @@ const SoftwarePreview = () => {
 
 // Enhanced Stats Component
 const Stats = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
   const stats = [
     { number: "50K+", label: "Global Users", icon: Users, color: "blue" },
     { number: "99.99%", label: "Uptime SLA", icon: Shield, color: "green" },
@@ -375,38 +558,86 @@ const Stats = () => {
 
   return (
     <motion.div 
+      ref={ref}
       className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mt-20"
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 1.8 }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: 0.2 }}
     >
       {stats.map((stat, idx) => (
         <motion.div
           key={idx}
-          className="group text-center p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500"
-          whileHover={{ scale: 1.08, y: -8 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          custom={idx}
+          className="group text-center p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-white/30 transition-all duration-500 relative overflow-hidden"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: idx * 0.15, duration: 0.6 }}
+          whileHover={{ scale: 1.08, y: -10 }}
         >
-          <div className={`w-16 h-16 bg-${stat.color}-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 border border-${stat.color}-500/20`}>
-            <stat.icon className={`w-8 h-8 text-${stat.color}-400`} />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative">
+            <motion.div
+              className={`w-16 h-16 bg-gradient-to-br from-${stat.color}-500/20 to-${stat.color}-600/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-${stat.color}-500/30`}
+              whileHover={{ rotate: 360, scale: 1.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <stat.icon className={`w-8 h-8 text-${stat.color}-400`} />
+            </motion.div>
+            <motion.div
+              className="text-3xl lg:text-4xl font-bold text-white mb-2"
+              initial={{ scale: 0 }}
+              animate={isInView ? { scale: 1 } : {}}
+              transition={{ delay: idx * 0.15 + 0.3, type: "spring", stiffness: 200 }}
+            >
+              {stat.number}
+            </motion.div>
+            <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
           </div>
-          <div className="text-3xl lg:text-4xl font-bold text-white mb-2 group-hover:scale-105 transition-transform">{stat.number}</div>
-          <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
         </motion.div>
       ))}
     </motion.div>
   );
 };
 
+// Typewriter effect for hero text
+const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 50);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text]);
+
+  return (
+    <motion.span
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay }}
+    >
+      {displayedText}
+      {currentIndex < text.length && (
+        <motion.span
+          className="inline-block w-1 h-8 md:h-12 lg:h-16 bg-blue-400 ml-2"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.8, repeat: Infinity }}
+        />
+      )}
+    </motion.span>
+  );
+};
+
 // Main Hero Component
 export default function Hero() {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const scale = useTransform(scrollY, [0, 400], [1, 0.8]);
-  const y = useTransform(scrollY, [0, 400], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const scale = useTransform(scrollY, [0, 500], [1, 0.8]);
+  const y = useTransform(scrollY, [0, 500], [0, 250]);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black text-white">
@@ -416,92 +647,172 @@ export default function Hero() {
         <ParticleField />
       </div>
 
+      {/* Live Metrics */}
+      <LiveMetrics />
+
       {/* Main Hero Content */}
       <motion.main 
         className="relative z-10 flex flex-col items-center justify-center px-6 lg:px-12 text-center"
         style={{ opacity, scale, y }}
       >
-        <div className="max-w-7xl mx-auto pt-32 pb-20">
+        <div className="max-w-7xl mx-auto pt-40 pb-24">
           {/* Main Heading Section */}
           <motion.div 
             className="max-w-6xl mx-auto space-y-10 mb-16"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            {/* Enhanced Badge */}
+            {/* Enhanced Badge with animation */}
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-8 py-4 border border-white/20 hover:border-white/30 transition-colors"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl rounded-full px-8 py-4 border border-white/30 hover:border-white/50 transition-colors relative overflow-hidden group"
+              initial={{ opacity: 0, scale: 0.8, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               whileHover={{ scale: 1.05 }}
             >
-              <Sparkles className="w-5 h-5 text-blue-400" />
-              <span className="text-base font-semibold bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-5 h-5 text-blue-400" />
+              </motion.div>
+              <span className="text-base font-semibold bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-transparent relative z-10">
                 Next-Generation AI Technology
               </span>
+              <motion.div
+                className="w-2 h-2 bg-green-400 rounded-full"
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
             </motion.div>
 
-            {/* Main Heading with Enhanced Gradient */}
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight leading-tight">
-              <motion.span 
+            {/* Main Heading with Enhanced Gradient and Stagger Animation */}
+            <div className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight leading-tight">
+              <motion.div 
                 className="block bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.7 }}
+                initial={{ opacity: 0, y: 40, rotateX: 90 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 1, delay: 0.7, type: "spring", stiffness: 100 }}
               >
                 AI Travel
-              </motion.span>
-              <motion.span 
-                className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.9 }}
+              </motion.div>
+              <motion.div 
+                className="block mt-4"
+                initial={{ opacity: 0, y: 40, rotateX: 90 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 1, delay: 0.9, type: "spring", stiffness: 100 }}
               >
-                Revolution
-              </motion.span>
-            </h1>
+                <motion.span
+                  className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent inline-block"
+                  animate={{
+                    backgroundPosition: ["0%", "100%", "0%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    backgroundSize: "200% 100%",
+                  }}
+                >
+                  Revolution
+                </motion.span>
+              </motion.div>
+            </div>
             
-            {/* Enhanced Subheading */}
-            <motion.p 
-              className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-200 max-w-4xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            {/* Enhanced Subheading with Word Stagger */}
+            <motion.div
+              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-200 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1.1 }}
             >
-              Transform Tourism with{' '}
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold">
+              {["Transform", "Tourism", "with"].map((word, idx) => (
+                <motion.span
+                  key={idx}
+                  className="inline-block mr-3"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.3 + idx * 0.1 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+              <motion.span
+                className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6 }}
+              >
                 Intelligent Automation
-              </span>{' '}
-              and Seamless Experiences
-            </motion.p>
+              </motion.span>
+              {["and", "Seamless", "Experiences"].map((word, idx) => (
+                <motion.span
+                  key={idx}
+                  className="inline-block ml-3"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.7 + idx * 0.1 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Enhanced CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row gap-6 max-w-xl mx-auto mb-20"
-            initial={{ opacity: 0, y: 30 }}
+            className="flex flex-col sm:flex-row gap-6 max-w-2xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.3 }}
+            transition={{ duration: 1, delay: 2 }}
           >
             <motion.button 
-              className="flex-1 bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 hover:from-blue-700 hover:via-blue-800 hover:to-purple-700 text-white font-bold py-5 px-10 rounded-2xl transition-all duration-300 shadow-2xl flex items-center justify-center gap-3 group relative overflow-hidden"
-              whileHover={{ scale: 1.05, y: -3 }}
+              className="relative flex-1 bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 text-white font-bold py-6 px-12 rounded-2xl transition-all duration-300 shadow-2xl flex items-center justify-center gap-3 group overflow-hidden"
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.6 }}
+              />
+              <span className="relative flex items-center gap-3 text-lg">
+                <Rocket className="w-6 h-6" />
+                Start Free Trial
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              </span>
+              <motion.div
+                className="absolute inset-0 border-2 border-white/20 rounded-2xl"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.5, 0, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
+            </motion.button>
+            <motion.button 
+              className="flex-1 border-2 border-white/30 text-white font-bold py-6 px-12 rounded-2xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-xl relative overflow-hidden group text-lg"
+              whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.98 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              <span className="relative">Start Free Trial</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform relative" />
-            </motion.button>
-            <motion.button 
-              className="flex-1 border-2 border-white/20 text-white font-bold py-5 px-10 rounded-2xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 backdrop-blur-xl"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Watch Demo
+              <span className="relative flex items-center justify-center gap-2">
+                <Play className="w-5 h-5" />
+                Watch Demo
+              </span>
             </motion.button>
           </motion.div>
+
+          {/* Trust Badges */}
+          <TrustBadges />
 
           {/* Stats Section */}
           <Stats />
@@ -513,22 +824,28 @@ export default function Hero() {
 
       {/* Enhanced Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30"
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-30"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3 }}
+        transition={{ delay: 3.5 }}
       >
         <motion.div 
-          className="w-10 h-16 border-2 border-white/20 rounded-full flex justify-center backdrop-blur-sm hover:border-white/40 transition-colors cursor-pointer"
-          animate={{ y: [0, 12, 0] }}
+          className="w-10 h-16 border-2 border-white/30 rounded-full flex justify-center backdrop-blur-sm hover:border-white/50 transition-colors cursor-pointer relative group"
+          animate={{ y: [0, 15, 0] }}
           transition={{ duration: 2.5, repeat: Infinity }}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.15 }}
         >
           <motion.div 
-            className="w-2 h-6 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full mt-3"
-            animate={{ y: [0, 10, 0] }}
+            className="w-2 h-6 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400 rounded-full mt-3"
+            animate={{ 
+              y: [0, 12, 0],
+              opacity: [1, 0.5, 1]
+            }}
             transition={{ duration: 2.5, repeat: Infinity }}
           />
+          <div className="absolute -bottom-12 text-white/60 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Scroll to explore
+          </div>
         </motion.div>
       </motion.div>
     </div>
