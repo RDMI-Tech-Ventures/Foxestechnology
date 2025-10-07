@@ -1,347 +1,338 @@
 'use client';
-import React from 'react';
+
 import Link from 'next/link';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Instagram,
-  Twitter,
-  Youtube,
-  Loader2,
-  ArrowRight,
-  Shield,
-  Star,
-  Building,
-} from 'lucide-react';
+import { Award, Mail, ArrowRight, Facebook, Twitter, Instagram, Linkedin, Youtube, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
 
-/**
- * Light / sophisticated Footer component
- * - White/soft theme
- * - Subtle shadows, gentle accents
- * - Full code (TSX)
- * - Accessible labels, no external citations
- */
+// --- Enhanced Logo Component ---
+const FoxesLogo = () => (
+  <Link href="/" className="group inline-block">
+    <Image
+      src="/logo3.png"
+      alt="Foxes Technology"
+      width={200}
+      height={60}
+      className="h-12 w-auto transition-all duration-300 group-hover:scale-105"
+      priority
+    />
+  </Link>
+);
 
-const PaymentIcons: Record<string, React.FC> = {
-  Visa: () => (
-    <svg width="56" height="36" viewBox="0 0 56 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <rect width="56" height="36" rx="6" fill="#F8FAFC" />
-      <path d="M13.6 12.8L10.1 24H12.5L13.8 20.83H18.2L18.9 24H21.1L18.38 12.8H13.6ZM14.6 18.51L16.13 14.31L17.43 18.51H14.6Z" fill="#0F172A" />
-      <path d="M27.28 12.8L25.05 19.28L24.3 14.88C24.18 14.06 23.78 13.73 23.22 13.73C23.1 13.73 22.52 13.75 22.52 13.75L22.37 12.8H24.92C25.72 12.8 26.55 13.2 26.76 13.98L27.9 18.35L29.64 12.8H31.78L28.8 24H26.57L27.28 12.8Z" fill="#0F172A" />
-      <path d="M40.45 12.8H38.1L36.26 19.82L37.12 15.96C37.29 15.02 37.15 14.4 36.5 14.1L35.5 13.78C35.5 13.78 35.64 13.22 35.72 12.8H37.9L40.14 24H38.12L37.64 21.97L35.44 24H33.28L36.6 12.8H40.45Z" fill="#0F172A" />
-    </svg>
-  ),
-  Mastercard: () => (
-    <svg width="56" height="36" viewBox="0 0 56 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <rect width="56" height="36" rx="6" fill="#F8FAFC" />
-      <circle cx="24" cy="18" r="9" fill="#FF6B2D" />
-      <circle cx="33.5" cy="18" r="9" fill="#E60023" fillOpacity="0.9" />
-    </svg>
-  ),
-  PayPal: () => (
-    <svg width="56" height="36" viewBox="0 0 56 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <rect width="56" height="36" rx="6" fill="#F8FAFC" />
-      <path d="M23.6 13.3C24.12 13.3 24.5 13.4 24.75 13.65C25 13.89 25.1 14.2 25.03 14.62L23.96 20.67C23.92 20.94 23.76 21.12 23.5 21.12H20.84L20.52 22.68C20.48 22.94 20.32 23.12 20.06 23.12H18.02C17.78 23.12 17.58 22.94 17.62 22.68L18.98 13.95C19.02 13.73 19.18 13.55 19.44 13.55H21.96L22.26 12.01C22.3 11.78 22.46 11.6 22.7 11.6H24.42C24.66 11.6 24.86 11.78 24.82 12.01L23.6 13.3Z" fill="#0070BA" />
-      <path d="M31.06 15.17C30.46 14.79 29.78 14.6 28.99 14.6H27.5L28.22 9.95C28.26 9.73 28.42 9.55 28.68 9.55H30.38C30.62 9.55 30.82 9.73 30.78 9.95L30.52 11.25C30.49 11.48 30.64 11.66 30.88 11.66H31.26C33.07 11.66 34.48 12.54 35.05 14.22C35.34 15.05 35.14 15.8 34.52 16.38C33.95 16.95 33.12 17.32 32.28 17.32C31.08 17.32 30.14 16.76 29.65 15.94L29.33 17.72C29.29 17.99 29.13 18.17 28.87 18.17H27.02C26.79 18.17 26.59 17.99 26.64 17.72L27.82 7.88C27.86 7.65 28.02 7.47 28.27 7.47H32.26C33.32 7.47 34.24 7.88 34.88 8.67C35.53 9.47 35.86 10.53 35.7 11.75C35.36 13.98 34.34 15.44 32.99 16.11C32.26 16.47 31.48 16.66 30.69 16.66H29.95L31.06 15.17Z" fill="#003087" />
-    </svg>
-  ),
-};
+// --- Link Column with Hover Animation ---
+const FooterLinkColumn = ({ title, links }: { title: string, links: { name: string, href: string }[] }) => (
+  <div>
+    <h3 className="mb-5 text-sm font-bold uppercase tracking-widest text-slate-900">{title}</h3>
+    <ul role="list" className="space-y-3">
+      {links.map((item, index) => (
+        <motion.li 
+          key={item.name}
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.05 }}
+          viewport={{ once: true }}
+        >
+          <Link
+            href={item.href}
+            className="group inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition-all hover:text-red-600 hover:translate-x-1"
+          >
+            <span className="h-px w-0 bg-red-500 transition-all duration-300 group-hover:w-3"></span>
+            {item.name}
+          </Link>
+        </motion.li>
+      ))}
+    </ul>
+  </div>
+);
 
-export default function Footer(): JSX.Element {
-  const [email, setEmail] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [subscribed, setSubscribed] = React.useState(false);
-  const [subscribeMessage, setSubscribeMessage] = React.useState<string | null>(null);
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
-      setSubscribeMessage('Please enter a valid email address.');
-      return;
-    }
-    setIsLoading(true);
-    setSubscribeMessage(null);
-
-    // Simulate API call (replace with real endpoint)
-    await new Promise((r) => setTimeout(r, 750));
-
-    try {
-      setSubscribed(true);
-      setSubscribeMessage('Thanks — you’re on the list.');
-      setEmail('');
-    } catch {
-      setSubscribeMessage('Something went wrong. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const solutions = [
-    { name: 'Booking & Management', href: '/solutions/booking-engine' },
-    { name: 'Handheld POS Terminals', href: '/solutions/pos-terminals' },
-    { name: 'Self-Service Kiosks', href: '/solutions/kiosks' },
-    { name: 'Turnstile Integration', href: '/solutions/turnstiles' },
-    { name: 'AI Chatbot (FoxesBOT)', href: '/solutions/ai-chatbot' },
-    { name: 'Social Media Platform', href: '/solutions/social-media' },
+// --- Social Links with Gradient Hover ---
+const SocialLinks = () => {
+  const socials = [
+    { icon: Facebook, href: '#', label: 'Facebook' },
+    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Youtube, href: '#', label: 'YouTube' },
   ];
 
   return (
-    <footer className="bg-white text-slate-700">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-          {/* Brand & Contact */}
-          <div className="space-y-5">
-            <Link href="/" className="inline-block">
-              <div className="flex items-center gap-3 group">
-                <motion.div
-                  className="w-14 h-14 rounded-2xl bg-gradient-to-br from-white to-white/80 border border-gray-100 flex items-center justify-center shadow-sm relative"
-                  whileHover={{ scale: 1.03 }}
-                >
-                  <div className="absolute -inset-1 bg-gradient-to-br from-sky-400 to-indigo-400 rounded-2xl blur-sm opacity-20 group-hover:opacity-80 transition-opacity duration-300" />
-                  <svg className="w-7 h-7 text-sky-600 relative" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" />
-                  </svg>
-                </motion.div>
+    <div className="flex items-center gap-3">
+      {socials.map((social) => (
+        <motion.a
+          key={social.label}
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={social.label}
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          className="group relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-slate-100 text-slate-600 transition-all hover:bg-red-600 hover:text-white hover:shadow-lg hover:shadow-red-500/30"
+        >
+          <social.icon className="relative z-10 h-5 w-5" />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-orange-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+        </motion.a>
+      ))}
+    </div>
+  );
+};
 
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900">FOXES Technology</h3>
-                  <p className="text-xs text-slate-500">AI-Powered Travel Innovation</p>
-                </div>
-              </div>
-            </Link>
+// --- Newsletter with Gradient Background ---
+const NewsletterSignup = () => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
-            <p className="text-sm text-slate-600 max-w-xs">
-              We design elegant, reliable digital products for travel & hospitality across Egypt and the Gulf.
-            </p>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setStatus('success');
+    setEmail('');
+    setTimeout(() => setStatus('idle'), 3000);
+  };
 
-            <div className="space-y-3 text-sm">
-              <a
-                className="flex items-center gap-3 text-slate-600 hover:text-sky-600 transition-colors"
-                href="mailto:info@foxestechnology.com"
-              >
-                <Mail className="w-5 h-5" />
-                <span>info@foxestechnology.com</span>
-              </a>
-
-              <a
-                className="flex items-center gap-3 text-slate-600 hover:text-sky-600 transition-colors"
-                href="tel:+201153855556"
-              >
-                <Phone className="w-5 h-5" />
-                <span>+20 115 385 5556</span>
-              </a>
-
-              <div className="flex items-center gap-3 text-slate-600">
-                <MapPin className="w-5 h-5" />
-                <span>Based in Egypt</span>
-              </div>
-            </div>
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-600 via-red-500 to-orange-500 p-8 shadow-2xl shadow-red-500/20"
+    >
+      {/* Decorative Elements */}
+      <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-orange-400/20 blur-2xl"></div>
+      
+      <div className="relative">
+        <div className="mb-4 flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+            <Sparkles className="h-6 w-6 text-white" />
           </div>
-
-          {/* Solutions */}
           <div>
-            <h3 className="font-semibold text-base mb-4 text-slate-900">Our Solutions</h3>
-            <ul className="space-y-3 text-sm">
-              {solutions.map((s) => (
-                <li key={s.name}>
-                  <Link
-                    href={s.href}
-                    className="text-slate-600 hover:text-sky-600 transition-colors group flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-3 h-3 group-hover:text-sky-600 transition-colors" />
-                    <span>{s.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="font-semibold text-base mb-4 text-slate-900">Company</h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/about" className="text-slate-600 hover:text-sky-600 transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="text-slate-600 hover:text-sky-600 transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-slate-600 hover:text-sky-600 transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-slate-600 hover:text-sky-600 transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/faqs" className="text-slate-600 hover:text-sky-600 transition-colors">
-                  FAQ
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter & Social */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-semibold text-base mb-4 text-slate-900">Join Our Newsletter</h3>
-
-              {!subscribed ? (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3" noValidate>
-                  <label htmlFor="footer-email" className="sr-only">
-                    Email address
-                  </label>
-                  <input
-                    id="footer-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your.email@example.com"
-                    className="flex-1 h-12 rounded-md border border-gray-200 bg-white px-4 text-sm text-slate-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-300 focus:border-sky-300"
-                    disabled={isLoading}
-                    aria-label="Email address"
-                  />
-                  <button
-                    type="submit"
-                    className="h-12 px-5 rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-colors text-sm font-semibold flex items-center justify-center disabled:opacity-60"
-                    disabled={isLoading}
-                    aria-label="Subscribe"
-                  >
-                    {isLoading ? <Loader2 className="animate-spin" /> : 'Subscribe'}
-                  </button>
-                </form>
-              ) : (
-                <div className="text-center py-4 rounded-md border border-green-100 bg-green-50">
-                  <h4 className="font-semibold text-sm text-green-700">You're in — thank you!</h4>
-                  <p className="text-sm text-slate-600">We’ll send occasional updates and product news.</p>
-                </div>
-              )}
-
-              {subscribeMessage && !subscribed && (
-                <p className="text-xs mt-2 text-slate-500" role="status">
-                  {subscribeMessage}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-base mb-4 text-slate-900">Follow Us</h3>
-              <div className="flex gap-3">
-                {[
-                  { Icon: Facebook, href: '#', label: 'Facebook' },
-                  { Icon: Instagram, href: '#', label: 'Instagram' },
-                  { Icon: Twitter, href: '#', label: 'Twitter' },
-                  { Icon: Youtube, href: '#', label: 'YouTube' },
-                ].map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="w-10 h-10 rounded-full bg-white border border-gray-100 text-slate-700 flex items-center justify-center shadow-sm hover:bg-sky-50 transition"
-                  >
-                    <social.Icon size={16} />
-                  </a>
-                ))}
-              </div>
-            </div>
+            <h3 className="text-xl font-black text-white">Stay Ahead</h3>
+            <p className="text-sm font-medium text-white/80">Get exclusive insights</p>
           </div>
         </div>
-
-        {/* Divider */}
-        <div className="border-t border-gray-100 my-10" />
-
-        {/* Trust & Payments */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex items-center gap-6">
-            <div className="text-left">
-              <p className="font-semibold text-slate-900 mb-2">Trusted by our clients</p>
-              <div className="flex items-center gap-4">
-                <span className="text-3xl font-bold text-slate-900">4.9</span>
-                <div className="flex">
-                  <Star fill="currentColor" size={18} className="text-yellow-400" />
-                  <Star fill="currentColor" size={18} className="text-yellow-400" />
-                  <Star fill="currentColor" size={18} className="text-yellow-400" />
-                  <Star fill="currentColor" size={18} className="text-yellow-400" />
-                  <Star fill="currentColor" size={18} className="text-yellow-400/60" />
-                </div>
-              </div>
-              <p className="text-sm text-slate-500 mt-1">Based on 1,200+ reviews</p>
-            </div>
+        
+        <p className="mb-5 text-sm leading-relaxed text-white/90">
+          Join 500+ operators receiving weekly tips, industry news, and product updates.
+        </p>
+        
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="relative">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              required
+              className="w-full rounded-xl border-2 border-white/30 bg-white/10 px-5 py-3.5 text-white placeholder-white/60 backdrop-blur-md transition-all focus:border-white focus:bg-white/20 focus:outline-none"
+            />
           </div>
-
-          <div className="w-full md:w-auto">
-            <h3 className="font-semibold text-base mb-4 text-slate-900 text-center md:text-left">Secure Payments</h3>
-            <div className="grid grid-cols-3 gap-3">
-              {Object.entries(PaymentIcons).map(([name, Comp]) => (
-                <div
-                  key={name}
-                  title={name}
-                  className="flex items-center justify-center rounded-lg bg-white border border-gray-100 p-3 shadow-sm hover:shadow-md transition"
-                >
-                  <Comp />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="border-t border-gray-100 my-8" />
-
-        {/* Legal & Copyright */}
-        <div className="text-center text-sm text-slate-500">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-4">
-            <Link href="/privacy" className="hover:text-slate-900 transition-colors">
-              Privacy Policy
-            </Link>
-            <span className="hidden sm:inline text-gray-300">•</span>
-            <Link href="/terms" className="hover:text-slate-900 transition-colors">
-              Terms & Conditions
-            </Link>
-            <span className="hidden sm:inline text-gray-300">•</span>
-            <Link href="/security" className="hover:text-slate-900 transition-colors">
-              Security
-            </Link>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-4 text-xs text-slate-400">
-            <span className="inline-flex items-center gap-2">
-              <Shield size={14} /> SOC 2 Compliant
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Star size={14} /> ISO 27001 Certified
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Building size={14} /> Official Partner of the Ministry of Tourism and Antiquities
-            </span>
-          </div>
-
-          <p className="mt-4 text-slate-500">© {new Date().getFullYear()} FOXES Technology. All Rights Reserved.</p>
-        </div>
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="group flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 font-bold text-red-600 shadow-lg transition-all hover:bg-white hover:shadow-xl disabled:opacity-50"
+          >
+            {status === 'loading' ? 'Subscribing...' : status === 'success' ? '✓ Subscribed!' : 'Subscribe Now'}
+            {status === 'idle' && <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />}
+          </button>
+        </form>
       </div>
+    </motion.div>
+  );
+};
 
-      {/* Back to Top */}
-      <motion.button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-white border border-gray-100 text-sky-600 rounded-full shadow-md flex items-center justify-center z-50"
-        whileHover={{ scale: 1.04, y: -4, boxShadow: '0 12px 30px rgba(14,165,233,0.12)' }}
-        whileTap={{ scale: 0.96 }}
-        aria-label="Back to top"
-      >
-        <motion.div animate={{ y: [-3, 3, -3] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
-          <ArrowRight className="w-6 h-6 -rotate-90" />
+// --- App Download Buttons ---
+const AppButtons = () => (
+  <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+    <motion.a
+      href="#"
+      whileHover={{ scale: 1.02, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      className="group flex flex-1 items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white px-5 py-4 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
+    >
+      <svg className="h-9 w-9 text-slate-900 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+      </svg>
+      <div className="text-left">
+        <p className="text-xs font-semibold text-slate-500">Download on the</p>
+        <p className="text-base font-bold text-slate-900">App Store</p>
+      </div>
+    </motion.a>
+    
+    <motion.a
+      href="#"
+      whileHover={{ scale: 1.02, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      className="group flex flex-1 items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white px-5 py-4 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
+    >
+      <svg className="h-9 w-9 text-slate-900 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+      </svg>
+      <div className="text-left">
+        <p className="text-xs font-semibold text-slate-500">Get it on</p>
+        <p className="text-base font-bold text-slate-900">Google Play</p>
+      </div>
+    </motion.a>
+  </div>
+);
+
+// --- Partner Badge ---
+const PartnerBadge = () => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    className="group relative overflow-hidden rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-6 shadow-sm transition-all hover:shadow-md"
+  >
+    <div className="relative flex items-start gap-4">
+      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-amber-100">
+        <Award className="h-8 w-8 text-amber-600" />
+      </div>
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wider text-amber-600">Official Partner</p>
+        <p className="mt-1 text-base font-bold text-slate-900">Ministry of Tourism</p>
+        <p className="text-sm font-medium text-slate-600">& Antiquities, Egypt</p>
+      </div>
+    </div>
+  </motion.div>
+);
+
+export default function Footer() {
+  const solutionsLinks = [
+    { name: 'Online Booking System', href: '/solutions/booking' },
+    { name: 'POS Hardware', href: '/solutions/pos' },
+    { name: 'AI Assistant (FoxesBOT)', href: '/solutions/ai' },
+    { name: 'Payment Processing', href: '/solutions/payments' },
+    { name: 'Analytics Dashboard', href: '/solutions/analytics' },
+  ];
+
+  const companyLinks = [
+    { name: 'About Us', href: '/about' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Case Studies', href: '/case-studies' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Partners', href: '/partners' },
+    { name: 'Contact', href: '/contact' },
+  ];
+
+  const resourcesLinks = [
+    { name: 'Documentation', href: '/docs' },
+    { name: 'API Reference', href: '/api' },
+    { name: 'Support Center', href: '/support' },
+    { name: 'System Status', href: '/status' },
+    { name: 'Community', href: '/community' },
+  ];
+
+  const legalLinks = [
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/terms' },
+    { name: 'Cookie Policy', href: '/cookies' },
+    { name: 'GDPR', href: '/gdpr' },
+  ];
+
+  return (
+    <footer className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgb(15 23 42) 1px, transparent 0)`,
+        backgroundSize: '32px 32px'
+      }}></div>
+
+      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+        
+        {/* Top Section: Logo + Description + Newsletter */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="space-y-6">
+            <FoxesLogo />
+            <p className="max-w-md text-base leading-relaxed text-slate-600">
+              The all-in-one operating system for modern tours, activities, and attractions. 
+              Trusted by 500+ operators across Egypt and the GCC.
+            </p>
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex items-center gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
+                  <span className="text-lg">✓</span>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-slate-900">500+ Operators</p>
+                  <p className="text-xs text-slate-500">Active users</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                  <span className="text-lg">$</span>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-slate-900">$50M+</p>
+                  <p className="text-xs text-slate-500">Processed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <NewsletterSignup />
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent lg:my-16"></div>
+
+        {/* Middle Section: Links Grid */}
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5 lg:gap-12">
+          <FooterLinkColumn title="Solutions" links={solutionsLinks} />
+          <FooterLinkColumn title="Company" links={companyLinks} />
+          <FooterLinkColumn title="Resources" links={resourcesLinks} />
+          
+          {/* App Downloads + Partner Badge */}
+          <div className="col-span-2 space-y-6">
+            <div>
+              <h3 className="mb-5 text-sm font-bold uppercase tracking-widest text-slate-900">Get The App</h3>
+              <AppButtons />
+            </div>
+            <PartnerBadge />
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent"></div>
+
+        {/* Bottom Section: Copyright + Legal + Social */}
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
+            <p className="text-center text-sm text-slate-500 md:text-left">
+              © {new Date().getFullYear()} <span className="font-bold text-slate-700">Foxes Technology LLC</span>. All rights reserved.
+            </p>
+            <div className="hidden h-5 w-px bg-slate-300 md:block"></div>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm md:justify-start">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="font-medium text-slate-500 transition-colors hover:text-red-600"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+          
+          <SocialLinks />
+        </div>
+
+        {/* Optional: Made with Love */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <p className="text-xs font-medium text-slate-400">
+            Made with <span className="text-red-500">❤</span> in Egypt & UAE
+          </p>
         </motion.div>
-      </motion.button>
+      </div>
     </footer>
   );
 }
