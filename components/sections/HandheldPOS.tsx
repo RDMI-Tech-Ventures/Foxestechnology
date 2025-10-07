@@ -53,37 +53,45 @@ export default function HandheldPOS() {
               </div>
             </motion.div>
 
-            {/* Main Container with Glass Effect */}
-            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-2xl">
-              {/* Main POS Image */}
-              <div className="relative mx-auto aspect-[3/4] max-w-md">
+            {/* Main Container */}
+            <div className="relative overflow-visible rounded-3xl bg-transparent p-8">
+              {/* Main POS Image with Floating Animation */}
+              <motion.div
+                animate={{
+                  y: [0, -15, 0],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="relative mx-auto aspect-[3/4] max-w-md"
+              >
                 <Image
                   src="/pos1.png"
                   alt="PAX A920 PRO Handheld Terminal"
                   fill
-                  className="object-contain drop-shadow-2xl transition-transform hover:scale-105"
+                  className="object-contain"
                   priority
                 />
 
-                {/* Gradient Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-green-100/60 via-transparent to-transparent rounded-b-3xl" />
-              </div>
+              </motion.div>
 
-              {/* Feature Pills Overlay */}
+              {/* Feature Pills - Below Image */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.8 }}
-                className="absolute bottom-8 left-8 right-8"
+                className="mt-6"
               >
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-2 rounded-xl border border-white bg-white/80 px-3 py-2 backdrop-blur-md shadow-lg">
-                    <Wifi className="h-4 w-4 text-blue-600" />
-                    <span className="text-xs font-bold text-slate-900">4G/WiFi</span>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center justify-center gap-2 rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-teal-50 px-4 py-4">
+                    <Wifi className="h-5 w-5 text-blue-600" />
+                    <span className="text-sm font-bold text-slate-900">4G/WiFi</span>
                   </div>
-                  <div className="flex items-center gap-2 rounded-xl border border-white bg-white/80 px-3 py-2 backdrop-blur-md shadow-lg">
-                    <Shield className="h-4 w-4 text-green-600" />
-                    <span className="text-xs font-bold text-slate-900">Secure</span>
+                  <div className="flex items-center justify-center gap-2 rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-teal-50 px-4 py-4">
+                    <Shield className="h-5 w-5 text-green-600" />
+                    <span className="text-sm font-bold text-slate-900">Secure</span>
                   </div>
                 </div>
               </motion.div>

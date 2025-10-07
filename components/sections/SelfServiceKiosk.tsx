@@ -135,37 +135,45 @@ export default function SelfServiceKiosk() {
               </div>
             </motion.div>
 
-            {/* Main Container with Glass Effect */}
-            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-2xl">
-              {/* Main Kiosk Image */}
-              <div className="relative mx-auto aspect-[3/4] max-w-md">
+            {/* Main Container */}
+            <div className="relative overflow-visible rounded-3xl bg-transparent p-8">
+              {/* Main Kiosk Image with Floating Animation */}
+              <motion.div
+                animate={{
+                  y: [0, -15, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="relative mx-auto aspect-[3/4] max-w-md"
+              >
                 <Image
                   src="/kiosk.png"
                   alt="PAX SK700 Self-Service Kiosk"
                   fill
-                  className="object-contain drop-shadow-2xl transition-transform hover:scale-105"
+                  className="object-contain"
                   priority
                 />
 
-                {/* Gradient Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-orange-100/60 via-transparent to-transparent rounded-b-3xl" />
-              </div>
+              </motion.div>
 
-              {/* Stats Overlay */}
+              {/* Stats Overlay - Below Image */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.8 }}
-                className="absolute bottom-8 left-8 right-8"
+                className="mt-6"
               >
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-white bg-white/80 p-4 text-center backdrop-blur-md shadow-lg">
-                    <div className="text-2xl font-black text-orange-600">24/7</div>
-                    <div className="text-xs font-semibold text-slate-600">Operation</div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-red-50 p-5 text-center">
+                    <div className="text-3xl font-black text-orange-600">24/7</div>
+                    <div className="text-sm font-bold text-slate-600">Operation</div>
                   </div>
-                  <div className="rounded-xl border border-white bg-white/80 p-4 text-center backdrop-blur-md shadow-lg">
-                    <div className="text-2xl font-black text-orange-600">-60%</div>
-                    <div className="text-xs font-semibold text-slate-600">Labor Cost</div>
+                  <div className="rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-red-50 p-5 text-center">
+                    <div className="text-3xl font-black text-orange-600">-60%</div>
+                    <div className="text-sm font-bold text-slate-600">Labor Cost</div>
                   </div>
                 </div>
               </motion.div>

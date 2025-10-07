@@ -386,17 +386,27 @@ const DeviceMockup = ({ isInView }: { isInView: boolean }) => {
   });
 
   return (
-    <motion.div 
-      variants={containerVariants} 
-      initial="hidden" 
-      animate={isInView ? "visible" : "hidden"} 
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
       className="relative flex h-full w-full items-center justify-center"
     >
       {/* Simple Image Container */}
       <div className="relative w-full max-w-3xl">
         <div className="relative" style={{ paddingBottom: '75%' }}>
-          {/* Just the image with rounded corners and shadow */}
-          <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-2xl">
+          {/* Floating Image with Animation */}
+          <motion.div
+            animate={{
+              y: [0, -20, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute inset-0 overflow-hidden rounded-2xl"
+          >
             <Image
               src="/foxeshero.png"
               alt="Foxes Technology Dashboard"
@@ -421,10 +431,7 @@ const DeviceMockup = ({ isInView }: { isInView: boolean }) => {
                 <span className="text-xs font-bold text-slate-900 whitespace-nowrap">Live</span>
               </motion.div>
             </div>
-
-            {/* Subtle overlay */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent"></div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
