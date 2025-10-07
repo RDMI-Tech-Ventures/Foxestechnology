@@ -10,6 +10,8 @@ import CTA from '@/components/CTA';
 // Note: The Footer is in your layout.tsx file, so it doesn't need to be imported here.
 import AIShowcase from '@/components/AIShowcase';
 import WhoWeServe from '@/components/WhoWeServe';
+import HandheldPOS from '@/components/sections/HandheldPOS';
+import SelfServiceKiosk from '@/components/sections/SelfServiceKiosk';
 
 export default function Home() {
   return (
@@ -30,7 +32,8 @@ export default function Home() {
 
         {/* 5. For Destinations: Elevates the brand to a strategic, nation-level partner. */}
         <ForDestinations />
-
+      <HandheldPOS />
+<SelfServiceKiosk />
         {/* 6. Testimonials: Adds the human element and qualitative social proof. */}
               <WhoWeServe />
         <TrustedBy />
