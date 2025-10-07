@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence, useInView, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, CheckCircle, Users, BarChart3, DollarSign, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle, Users, BarChart3, DollarSign, TrendingUp, X, Sparkles } from 'lucide-react';
 
 // --- Configuration ---
 const BACKGROUND_IMAGES = [
@@ -31,14 +31,156 @@ function Counter({ value }: { value: number }) {
   return <motion.span ref={ref}>{display}</motion.span>;
 }
 
+// --- Coming Soon Modal Component ---
+const ComingSoonModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+          />
+
+          {/* Modal */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative w-full max-w-md overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 p-8 shadow-2xl"
+            >
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `radial-gradient(circle at 2px 2px, rgb(239 68 68) 1px, transparent 0)`,
+                  backgroundSize: '32px 32px'
+                }}></div>
+              </div>
+
+              {/* Decorative Glow */}
+              <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-red-500/20 blur-3xl"></div>
+
+              {/* Close Button */}
+              <button
+                onClick={onClose}
+                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:rotate-90"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              {/* Content */}
+              <div className="relative text-center">
+                {/* Icon */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                  className="mx-auto mb-6 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg"
+                >
+                  <Sparkles className="h-10 w-10 text-white" />
+                </motion.div>
+
+                {/* Heading */}
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="mb-4 text-3xl font-black text-white"
+                >
+                  Coming Soon!
+                </motion.h2>
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="mb-6 text-base leading-relaxed text-gray-300"
+                >
+                  We're putting the finishing touches on an amazing onboarding experience.
+                  Get notified when we launch!
+                </motion.p>
+
+                {/* Email Form */}
+                <motion.form
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="space-y-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    // Add email submission logic here
+                    alert('Thank you! We\'ll notify you when we launch.');
+                    onClose();
+                  }}
+                >
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    className="w-full rounded-xl border-2 border-white/20 bg-white/10 px-5 py-3.5 text-white placeholder-white/60 backdrop-blur-md transition-all focus:border-red-500 focus:bg-white/20 focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:shadow-xl"
+                  >
+                    <span>Notify Me</span>
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </button>
+                </motion.form>
+
+                {/* Footer Text */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="mt-6 text-xs text-gray-500"
+                >
+                  In the meantime, explore our{' '}
+                  <Link href="/solutions" onClick={onClose} className="font-semibold text-red-400 hover:text-red-300">
+                    solutions
+                  </Link>
+                  {' '}or{' '}
+                  <Link href="/contact" onClick={onClose} className="font-semibold text-red-400 hover:text-red-300">
+                    contact us
+                  </Link>
+                </motion.p>
+              </div>
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
 // --- Main Hero Component ---
 export default function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section ref={ref} className="relative min-h-screen w-full overflow-hidden bg-slate-950">
       <BackgroundSlider />
+      <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       
       {/* Enhanced Gradient Overlays for Better Text Visibility */}
       <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/50 to-black/30"></div>
@@ -52,7 +194,7 @@ export default function Hero() {
 
       <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-screen grid-cols-1 items-center gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
-          <HeroContent isInView={isInView} />
+          <HeroContent isInView={isInView} setIsModalOpen={setIsModalOpen} />
           <DeviceMockup isInView={isInView} />
         </div>
       </div>
@@ -98,7 +240,7 @@ const BackgroundSlider = () => {
 };
 
 // --- Sub-component: Hero Content ---
-const HeroContent = ({ isInView }: { isInView: boolean }) => {
+const HeroContent = ({ isInView, setIsModalOpen }: { isInView: boolean; setIsModalOpen: (open: boolean) => void }) => {
   const containerVariants = { 
     hidden: { opacity: 0 }, 
     visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } } 
@@ -175,21 +317,20 @@ const HeroContent = ({ isInView }: { isInView: boolean }) => {
       </motion.div>
 
       {/* CTA Buttons - Mobile Optimized */}
-      <motion.div 
-        variants={itemVariants} 
+      <motion.div
+        variants={itemVariants}
         className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-center lg:justify-start"
       >
-        <Link href="/get-started" className="w-full sm:w-auto">
-          <motion.button 
-            whileHover={{ scale: 1.05, boxShadow: "0px 20px 40px -10px rgba(239, 68, 68, 0.6)" }} 
-            whileTap={{ scale: 0.98 }} 
-            className={`group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-2xl shadow-red-500/30 transition-all duration-300 ${BRAND_HOVER_PRIMARY} sm:text-lg`}
-          >
-            <span className="relative z-10">Get Started Free</span>
-            <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            <div className="absolute inset-0 -z-0 bg-gradient-to-r from-red-600 to-orange-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-          </motion.button>
-        </Link>
+        <motion.button
+          onClick={() => setIsModalOpen(true)}
+          whileHover={{ scale: 1.05, boxShadow: "0px 20px 40px -10px rgba(239, 68, 68, 0.6)" }}
+          whileTap={{ scale: 0.98 }}
+          className={`group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-2xl shadow-red-500/30 transition-all duration-300 ${BRAND_HOVER_PRIMARY} sm:w-auto sm:text-lg`}
+        >
+          <span className="relative z-10">Get Started Free</span>
+          <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          <div className="absolute inset-0 -z-0 bg-gradient-to-r from-red-600 to-orange-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+        </motion.button>
         
         <Link href="/demo" className="w-full sm:w-auto">
           <motion.button 
