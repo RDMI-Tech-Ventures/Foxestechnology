@@ -32,7 +32,7 @@ function AboutHero() {
             {/* Background Image */}
             <div className="absolute inset-0">
                 <Image
-                    src="/images/about/team-background.jpg"
+                    src="/hero2.png"
                     alt="Foxes Technology Team"
                     fill
                     className="object-cover opacity-10"

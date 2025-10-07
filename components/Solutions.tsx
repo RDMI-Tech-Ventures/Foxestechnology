@@ -17,7 +17,7 @@ const solutionsData = [
             "Real-time inventory management",
             "Integrated payment processing"
         ],
-        image: "/images/solutions/online-booking.png",
+        image: "/foxes1.png",
         link: "/solutions/online-booking",
         color: "from-blue-500 to-blue-600"
     },
@@ -31,7 +31,7 @@ const solutionsData = [
             "Live inventory synchronization",
             "Perfect for field sales teams"
         ],
-        image: "/images/solutions/pos-handheld.png",
+        image: "/pos.png",
         link: "/solutions/pos-hardware",
         color: "from-green-500 to-green-600"
     },

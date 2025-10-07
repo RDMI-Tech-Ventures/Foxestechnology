@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { Mail, Phone, MapPin, Building, ArrowRight, Send, CheckCircle, Clock, Users, MessageSquare } from 'lucide-react';
 
 const BRAND_COLOR_PRIMARY = "bg-red-600";
 const BRAND_HOVER_PRIMARY = "hover:bg-red-700";
 const BRAND_TEXT_PRIMARY = "text-red-600";
-const BRAND_BORDER_PRIMARY = "border-red-600";
 
 // Main Page Component
 export default function ContactPage() {
@@ -16,7 +14,7 @@ export default function ContactPage() {
         <main className="bg-white">
             <ContactHero />
             <ContactMethods />
-            <ContactFormAndMap />
+            <ContactFormAndInfo />
             <FAQSection />
         </main>
     );
@@ -124,7 +122,7 @@ const contactMethods = [
         name: 'Visit Our Office', 
         icon: MapPin, 
         detail: 'Cairo, Egypt', 
-        href: '#map',
+        href: '#office-info',
         description: 'Book a meeting at our HQ',
         color: 'from-purple-500 to-purple-600'
     },
@@ -187,8 +185,8 @@ function ContactMethods() {
     );
 }
 
-// 3. Enhanced Contact Form & Map
-function ContactFormAndMap() {
+// 3. Enhanced Contact Form & Office Info
+function ContactFormAndInfo() {
     const [formData, setFormData] = useState({
         firstName: '', 
         lastName: '', 
@@ -219,7 +217,7 @@ function ContactFormAndMap() {
     };
 
     return (
-        <section id="map" className="relative bg-white py-20 sm:py-28">
+        <section id="office-info" className="relative bg-white py-20 sm:py-28">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
                     
@@ -369,7 +367,7 @@ function ContactFormAndMap() {
                         </form>
                     </motion.div>
 
-                    {/* Map & Office Info */}
+                    {/* Office Info */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -377,31 +375,16 @@ function ContactFormAndMap() {
                         transition={{ duration: 0.6 }}
                         className="space-y-8"
                     >
-                        {/* Map */}
-                        <div className="relative h-96 overflow-hidden rounded-3xl border-2 border-slate-200 shadow-xl lg:h-[500px]">
-                            <Image
-                                src="/images/contact/map.png"
-                                alt="Foxes Technology office location in Cairo, Egypt"
-                                fill
-                                className="object-cover"
-                            />
-                            {/* Overlay with location pin */}
-                            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/20">
-                                <motion.div
-                                    animate={{ y: [0, -10, 0] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                    className={`flex h-16 w-16 items-center justify-center rounded-full ${BRAND_COLOR_PRIMARY} shadow-2xl`}
-                                >
-                                    <MapPin className="h-8 w-8 text-white" />
-                                </motion.div>
-                            </div>
-                        </div>
-
                         {/* Office Hours & Details */}
-                        <div className="space-y-4">
-                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6">
-                                <h3 className="text-xl font-bold text-slate-900">Office Hours</h3>
-                                <div className="mt-4 space-y-2 text-sm text-slate-600">
+                        <div className="space-y-6">
+                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
+                                        <Clock className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-slate-900">Office Hours</h3>
+                                </div>
+                                <div className="space-y-3 text-base text-slate-600">
                                     <p className="flex justify-between">
                                         <span className="font-semibold">Monday - Friday:</span>
                                         <span>9:00 AM - 6:00 PM</span>
@@ -417,14 +400,29 @@ function ContactFormAndMap() {
                                 </div>
                             </div>
 
-                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6">
-                                <h3 className="text-xl font-bold text-slate-900">Headquarters</h3>
-                                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600">
+                                        <Building className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-slate-900">Headquarters</h3>
+                                </div>
+                                <p className="text-base leading-relaxed text-slate-600">
                                     Foxes Technology LLC<br />
                                     Cairo, Egypt<br />
-                                    <a href="mailto:info@foxestechnology.com" className={`mt-2 inline-block font-semibold ${BRAND_TEXT_PRIMARY} hover:underline`}>
+                                    <a href="mailto:info@foxestechnology.com" className={`mt-3 inline-block font-semibold ${BRAND_TEXT_PRIMARY} hover:underline`}>
                                         info@foxestechnology.com
                                     </a>
+                                </p>
+                            </div>
+
+                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-red-50 to-white p-8">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <CheckCircle className={`h-6 w-6 ${BRAND_TEXT_PRIMARY}`} />
+                                    <h3 className="text-xl font-bold text-slate-900">Quick Response</h3>
+                                </div>
+                                <p className="text-base text-slate-600">
+                                    We guarantee a response to all inquiries within 24 hours during business days.
                                 </p>
                             </div>
                         </div>

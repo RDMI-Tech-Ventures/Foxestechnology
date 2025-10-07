@@ -15,7 +15,6 @@ const BACKGROUND_IMAGES = [
 
 const BRAND_COLOR_PRIMARY = "bg-red-600";
 const BRAND_HOVER_PRIMARY = "hover:bg-red-700";
-const BRAND_TEXT_PRIMARY = "text-red-600";
 
 // --- Reusable Animated Counter Component ---
 function Counter({ value }: { value: number }) {
@@ -66,21 +65,21 @@ const BackgroundSlider = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => { 
-      setCurrentImage((prev) => (prev + 1) % BACKGROUND_IMAGES.length); 
+    const timer = setTimeout(() => {
+      setCurrentImage((prev) => (prev + 1) % BACKGROUND_IMAGES.length);
     }, 8000);
     return () => clearTimeout(timer);
   }, [currentImage]);
 
   return (
     <div className="absolute inset-0 z-0">
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.div
           key={currentImage}
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 1.05, opacity: 0 }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
           <Image
@@ -129,15 +128,20 @@ const HeroContent = ({ isInView }: { isInView: boolean }) => {
       </motion.div>
 
       {/* Main Heading with Enhanced Visibility */}
-      <motion.h1 
-        variants={itemVariants} 
+      <motion.h1
+        variants={itemVariants}
         className="text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
         style={{
           textShadow: '0 4px 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 1)'
         }}
       >
         Transform Your
-        <span className="block bg-gradient-to-r from-red-500 via-red-400 to-orange-500 bg-clip-text text-transparent">
+        <span
+          className="block bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent"
+          style={{
+            textShadow: '0 0 60px rgba(251, 146, 60, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)'
+          }}
+        >
           Travel Business
         </span>
       </motion.h1>
@@ -228,7 +232,7 @@ const HeroContent = ({ isInView }: { isInView: boolean }) => {
   );
 };
 
-// --- Sub-component: Device Mockup ---
+// --- Sub-component: Device Mockup (Now Just Image) ---
 const DeviceMockup = ({ isInView }: { isInView: boolean }) => {
   const containerVariants = { 
     hidden: { opacity: 0, scale: 0.85, y: 50 }, 
@@ -245,100 +249,94 @@ const DeviceMockup = ({ isInView }: { isInView: boolean }) => {
       variants={containerVariants} 
       initial="hidden" 
       animate={isInView ? "visible" : "hidden"} 
-      className="relative hidden lg:flex h-full w-full items-center justify-center"
+      className="relative flex h-full w-full items-center justify-center"
     >
-      {/* iPad Container */}
+      {/* Simple Image Container */}
       <div className="relative w-full max-w-3xl">
         <div className="relative" style={{ paddingBottom: '75%' }}>
-          {/* Device Frame */}
-          <div 
-            className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-slate-100 via-white to-slate-200 shadow-2xl"
-            style={{ 
-              padding: '0.75rem',
-              boxShadow: '0 30px 60px -15px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.8), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
-              transform: 'perspective(2000px) rotateY(-3deg) rotateX(2deg)'
-            }}
-          >
-            {/* Screen Display */}
-            <div className="relative h-full w-full overflow-hidden rounded-[2rem] bg-black">
-              <div className="absolute inset-0 bg-white">
-                <Image
-                  src="/images/dashboard-screenshot.jpg"
-                  alt="Foxes Technology Dashboard"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                  sizes="50vw"
-                />
-              </div>
-              
-              {/* Screen Glare */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent"></div>
+          {/* Just the image with rounded corners and shadow */}
+          <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-2xl">
+            <Image
+              src="/foxeshero.png"
+              alt="Foxes Technology Dashboard"
+              fill
+              className="object-cover object-top"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+
+            {/* Compact Badge on Image */}
+            <div className="absolute left-3 top-3 z-20">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 1.2, duration: 0.5, type: "spring" }}
+                className="flex items-center gap-1.5 rounded-full border border-red-500/20 bg-white/95 px-2.5 py-1 shadow-lg backdrop-blur-sm"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                </span>
+                <span className="text-xs font-bold text-slate-900 whitespace-nowrap">Live</span>
+              </motion.div>
             </div>
-            
-            {/* Camera */}
-            <div 
-              className="absolute left-2 top-1/2 z-10 h-2 w-2 -translate-y-1/2 rounded-full bg-slate-800 ring-1 ring-slate-700"
-              style={{ boxShadow: '0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2)' }}
-            ></div>
+
+            {/* Subtle overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent"></div>
           </div>
-          
-          {/* Buttons */}
-          <div 
-            className="absolute right-24 top-0 h-1 w-16 rounded-b-md bg-gradient-to-r from-slate-300 via-slate-200 to-slate-300"
-            style={{ boxShadow: 'inset 0 -1px 2px rgba(0, 0, 0, 0.2)', transform: 'translateY(-0.75rem)' }}
-          ></div>
         </div>
       </div>
 
-      {/* Floating Stats Cards */}
-      <FloatingCard variants={cardVariants(0)} className="absolute -left-8 top-12 w-56 xl:-left-16">
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="text-4xl font-black text-slate-900"><Counter value={500} /></div>
-            <div className="mt-1 text-sm font-bold text-slate-600">Active Operators</div>
-          </div>
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white shadow-lg">
-            <Users className="h-6 w-6" />
-          </div>
-        </div>
-        <div className="mt-3 flex items-center gap-2">
-          <div className="h-2 flex-1 rounded-full bg-slate-200">
-            <div className={`h-2 w-3/4 rounded-full ${BRAND_COLOR_PRIMARY}`}></div>
-          </div>
-          <span className="text-xs font-bold text-slate-500">75%</span>
-        </div>
-      </FloatingCard>
-
-      <FloatingCard variants={cardVariants(0.15)} className="absolute -right-8 top-1/3 w-60 xl:-right-16">
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-4xl font-black text-transparent">
-              <Counter value={50000000} />
+      {/* Floating Stats Cards - 2x Smaller - Desktop Only */}
+      <div className="hidden lg:block">
+        <FloatingCard variants={cardVariants(0)} className="absolute -left-8 top-12 w-28 xl:-left-16">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="text-xl font-black text-slate-900"><Counter value={500} /></div>
+              <div className="mt-0.5 text-[0.65rem] font-bold text-slate-600">Active Operators</div>
             </div>
-            <div className="mt-1 text-sm font-bold text-slate-600">Revenue Processed</div>
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white shadow-lg">
+              <Users className="h-3 w-3" />
+            </div>
           </div>
-          <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${BRAND_COLOR_PRIMARY} text-white shadow-lg`}>
-            <DollarSign className="h-6 w-6" />
+          <div className="mt-2 flex items-center gap-1">
+            <div className="h-1 flex-1 rounded-full bg-slate-200">
+              <div className={`h-1 w-3/4 rounded-full ${BRAND_COLOR_PRIMARY}`}></div>
+            </div>
+            <span className="text-[0.6rem] font-bold text-slate-500">75%</span>
           </div>
-        </div>
-        <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-green-600">
-          <TrendingUp className="h-4 w-4" />
-          <span>+23% this month</span>
-        </div>
-      </FloatingCard>
+        </FloatingCard>
 
-      <FloatingCard variants={cardVariants(0.3)} className="absolute -left-4 bottom-16 w-56 xl:-left-12">
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="text-4xl font-black text-slate-900"><Counter value={1000000} /></div>
-            <div className="mt-1 text-sm font-bold text-slate-600">Bookings Managed</div>
+        <FloatingCard variants={cardVariants(0.15)} className="absolute -right-8 top-1/3 w-32 xl:-right-16">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-xl font-black text-transparent">
+                <Counter value={50000000} />
+              </div>
+              <div className="mt-0.5 text-[0.65rem] font-bold text-slate-600">Revenue Processed</div>
+            </div>
+            <div className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg ${BRAND_COLOR_PRIMARY} text-white shadow-lg`}>
+              <DollarSign className="h-3 w-3" />
+            </div>
           </div>
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg">
-            <BarChart3 className="h-6 w-6" />
+          <div className="mt-2 flex items-center gap-0.5 text-[0.65rem] font-semibold text-green-600">
+            <TrendingUp className="h-2.5 w-2.5" />
+            <span>+23% this month</span>
           </div>
-        </div>
-      </FloatingCard>
+        </FloatingCard>
+
+        <FloatingCard variants={cardVariants(0.3)} className="absolute -left-4 bottom-16 w-28 xl:-left-12">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="text-xl font-black text-slate-900"><Counter value={1000000} /></div>
+              <div className="mt-0.5 text-[0.65rem] font-bold text-slate-600">Bookings Managed</div>
+            </div>
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg">
+              <BarChart3 className="h-3 w-3" />
+            </div>
+          </div>
+        </FloatingCard>
+      </div>
     </motion.div>
   );
 };
@@ -354,7 +352,7 @@ const FloatingCard = ({
 }) => (
   <motion.div 
     variants={variants} 
-    className={`${className} transform-gpu rounded-2xl border border-slate-200/80 bg-white/95 p-5 shadow-2xl backdrop-blur-md ring-1 ring-white/50`}
+    className={`${className} transform-gpu rounded-xl border border-slate-200/80 bg-white/95 p-2.5 shadow-2xl backdrop-blur-md ring-1 ring-white/50`}
   >
     {children}
   </motion.div>

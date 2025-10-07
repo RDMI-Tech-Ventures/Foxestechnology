@@ -103,7 +103,7 @@ export default function AIShowcase() {
                                 className="relative mx-auto w-full max-w-md"
                             >
                                 <Image
-                                    src="/bot.png"
+                                    src="/botfox.png"
                                     alt="FoxesBot - AI-Powered Travel Assistant"
                                     width={400}
                                     height={400}
@@ -142,9 +142,7 @@ export default function AIShowcase() {
                             transition={{ delay: 0.4 }}
                             className="mt-8 text-center"
                         >
-                            <h3 className="text-4xl font-black text-slate-900 sm:text-5xl">
-                                Foxes<span className="text-orange-500">BOT</span>
-                            </h3>
+                          
                             <p className="mt-3 text-lg font-semibold text-slate-600">
                                 Your AI-Powered Travel Assistant
                             </p>
