@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,6 +18,7 @@ import {
     Shield,
     Award
 } from 'lucide-react';
+import ComingSoonModal from '@/components/ComingSoonModal';
 
 const BRAND_COLOR_PRIMARY = "bg-red-600";
 
@@ -147,8 +149,11 @@ const platformBenefits = [
 ];
 
 export default function SolutionsPage() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <main className="min-h-screen bg-white">
+            <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             {/* Hero Section */}
             <section className="relative overflow-hidden bg-slate-950 py-20 sm:py-28">
                 {/* Background Image with Overlay */}
@@ -417,16 +422,15 @@ export default function SolutionsPage() {
                             </p>
 
                             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                                <Link href="/get-started">
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className={`group inline-flex w-full items-center justify-center gap-2 rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-red-700 sm:w-auto`}
-                                    >
-                                        <span>Start Free Trial</span>
-                                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                                    </motion.button>
-                                </Link>
+                                <motion.button
+                                    onClick={() => setIsModalOpen(true)}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className={`group inline-flex w-full items-center justify-center gap-2 rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-red-700 sm:w-auto`}
+                                >
+                                    <span>Start Free Trial</span>
+                                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                </motion.button>
                                 <Link href="/contact">
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}

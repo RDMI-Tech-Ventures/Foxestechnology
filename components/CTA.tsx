@@ -1,12 +1,18 @@
 // src/components/CTA.tsx
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import ComingSoonModal from './ComingSoonModal';
 
 export default function CTA() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
+    <>
+      <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     <section className="bg-gray-950">
       <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-28 lg:px-8">
         {/* Background Gradient */}
@@ -41,15 +47,15 @@ export default function CTA() {
               viewport={{ once: true }}
               className="mt-10 flex items-center justify-center gap-x-6"
             >
-              <Link
-                href="/get-started"
+              <button
+                onClick={() => setIsModalOpen(true)}
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-foxes-orange px-8 py-4 text-base font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105"
               >
                 Get Started
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </button>
               <Link
-                href="/contact-sales"
+                href="/contact"
                 className="rounded-full px-8 py-4 text-base font-semibold text-white ring-1 ring-inset ring-white/50 transition-colors duration-300 hover:bg-white/10"
               >
                 Contact Sales
@@ -59,5 +65,6 @@ export default function CTA() {
         </div>
       </div>
     </section>
+    </>
   );
 }
