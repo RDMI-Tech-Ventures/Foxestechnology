@@ -200,19 +200,18 @@ const PartnerBadge = () => (
 
 export default function Footer() {
   const solutionsLinks = [
-    { name: 'Online Booking System', href: '/solutions/booking' },
-    { name: 'POS Hardware', href: '/solutions/pos' },
-    { name: 'AI Assistant (FoxesBOT)', href: '/solutions/ai' },
-    { name: 'Payment Processing', href: '/solutions/payments' },
+    { name: 'All Solutions', href: '/solutions' },
+    { name: 'Online Booking', href: '/solutions/online-booking' },
+    { name: 'POS Hardware', href: '/solutions/pos-hardware' },
+    { name: 'Self-Service Kiosk', href: '/solutions/kiosk' },
+    { name: 'AI Assistant', href: '/solutions/ai' },
     { name: 'Analytics Dashboard', href: '/solutions/analytics' },
   ];
 
   const companyLinks = [
     { name: 'About Us', href: '/about' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Case Studies', href: '/case-studies' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Partners', href: '/partners' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -220,15 +219,12 @@ export default function Footer() {
     { name: 'Documentation', href: '/docs' },
     { name: 'API Reference', href: '/api' },
     { name: 'Support Center', href: '/support' },
-    { name: 'System Status', href: '/status' },
-    { name: 'Community', href: '/community' },
+    { name: 'Get Started', href: '/get-started' },
   ];
 
   const legalLinks = [
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
-    { name: 'Cookie Policy', href: '/cookies' },
-    { name: 'GDPR', href: '/gdpr' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Terms of Service', href: '/terms-of-service' },
   ];
 
   return (
