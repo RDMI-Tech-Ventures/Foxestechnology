@@ -5,18 +5,26 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { ArrowRight, Clock, Shield, Smartphone } from 'lucide-react';
+import { ArrowRight, Clock, Shield, Smartphone, Zap, CheckCircle, TrendingUp } from 'lucide-react';
 
 export default function SelfServiceKiosk() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-white py-20 lg:py-32">
+    <section ref={ref} className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 py-20 lg:py-32">
       {/* Background Decoration */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-orange-100/20 blur-3xl" />
-        <div className="absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-teal-100/20 blur-3xl" />
+        <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-gradient-to-br from-orange-100 to-red-100 opacity-20 blur-3xl" />
+        <div className="absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 opacity-20 blur-3xl" />
+      </div>
+
+      {/* Subtle Pattern Overlay */}
+      <div className="absolute inset-0 opacity-[0.015]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgb(231 119 36) 1px, transparent 0)`,
+          backgroundSize: '48px 48px'
+        }}></div>
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -26,107 +34,154 @@ export default function SelfServiceKiosk() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <h2 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-              <span className="text-[#E77724]">Self-service kiosk</span>
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-gradient-to-r from-orange-50 to-red-50 px-5 py-2.5 shadow-sm backdrop-blur-sm"
+            >
+              <Zap className="h-4 w-4 text-orange-600" />
+              <span className="text-sm font-bold text-slate-900">Self-Service Solution</span>
+            </motion.div>
+
+            <h2 className="text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+              <span className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
+                Self-Service Kiosk
+              </span>
             </h2>
 
-            <p className="text-lg leading-relaxed text-slate-600 lg:text-xl">
-              The self-service kiosk is a great way to offer efficient customer-focused sales.
-            </p>
+            <div className="space-y-4">
+              <p className="text-lg leading-relaxed text-slate-600 lg:text-xl">
+                The self-service kiosk offers <span className="font-bold text-slate-900">efficient customer-focused sales</span> 24/7.
+              </p>
 
-            <p className="text-lg leading-relaxed text-slate-600 lg:text-xl">
-              We have developed a <span className="font-semibold text-slate-900">fully-integrated payment solution</span> so you don't need to manage multiple devices.
-            </p>
+              <p className="text-lg leading-relaxed text-slate-600 lg:text-xl">
+                Featuring a <span className="font-bold text-orange-600">fully-integrated payment solution</span> — no multiple devices needed.
+              </p>
 
-            <p className="text-lg leading-relaxed text-slate-600 lg:text-xl">
-              The kiosk is powered by the <span className="font-semibold text-[#E77724]">Foxes Booking App</span> can be located indoors or outdoors ensuring you can <span className="font-semibold text-slate-900">keep selling 24/7</span>.
-            </p>
+              <p className="text-lg leading-relaxed text-slate-600 lg:text-xl">
+                Powered by the <span className="font-bold text-orange-600">Foxes Booking App</span>, deployable indoors or outdoors.
+              </p>
+            </div>
 
-            {/* Key Features */}
-            <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-3">
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#E77724] to-orange-600">
-                  <Clock className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-sm font-semibold text-slate-900">24/7 Sales</div>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-teal-600">
-                  <Shield className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-sm font-semibold text-slate-900">Secure Payments</div>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-slate-600 to-slate-800">
-                  <Smartphone className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-sm font-semibold text-slate-900">Self-Service</div>
-              </div>
+            {/* Key Features Grid */}
+            <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-2">
+              {[
+                { icon: Clock, label: '24/7 Availability', color: 'from-orange-500 to-red-600' },
+                { icon: Shield, label: 'Secure Payments', color: 'from-teal-500 to-cyan-600' },
+                { icon: Smartphone, label: 'Touch Interface', color: 'from-purple-500 to-pink-600' },
+                { icon: TrendingUp, label: 'Boost Revenue', color: 'from-blue-500 to-indigo-600' },
+              ].map((feature, index) => (
+                <motion.div
+                  key={feature.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
+                  className="group relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-orange-300 hover:shadow-lg"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${feature.color} shadow-lg transition-transform group-hover:scale-110`}>
+                      <feature.icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-bold text-slate-900">{feature.label}</div>
+                    </div>
+                    <CheckCircle className="h-5 w-5 text-green-500 opacity-0 transition-opacity group-hover:opacity-100" />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+                </motion.div>
+              ))}
             </div>
 
             {/* CTA Button */}
             <div className="pt-4">
-              <Link href="/products/kiosk">
+              <Link href="/solutions/kiosk">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#E77724] px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-orange-600 hover:shadow-xl"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-600 to-red-600 px-8 py-4 text-lg font-bold text-white shadow-2xl shadow-orange-500/30 transition-all duration-300 hover:shadow-orange-500/50"
                 >
-                  Learn More
+                  Explore Kiosk Solution
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </motion.button>
               </Link>
             </div>
           </motion.div>
 
-          {/* Right - Product Image with Background */}
+          {/* Right - Product Image with Enhanced Design */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            {/* Background Image Layer */}
-            <div className="absolute inset-0 -z-10 opacity-10">
-              <Image
-                src="/kiosk.png"
-                alt="Kiosk Background"
-                fill
-                className="object-cover rounded-3xl"
-              />
-            </div>
+            {/* Floating Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+              transition={{ delay: 0.5 }}
+              className="absolute -top-6 right-8 z-20"
+            >
+              <div className="rounded-2xl border-2 border-orange-200 bg-white px-5 py-3 shadow-xl backdrop-blur-sm">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
+                  <span className="text-sm font-bold text-slate-900">
+                    <span className="text-orange-600">Foxes</span> Kiosk Concept
+                  </span>
+                </div>
+              </div>
+            </motion.div>
 
-            {/* Concept Badge */}
-            <div className="mb-4 text-right">
-              <span className="inline-block rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-semibold text-slate-900">
-                <span className="text-[#E77724]">Foxes</span> Kiosk <span className="text-slate-600">Concept</span>
-              </span>
-            </div>
+            {/* Main Container with Glass Effect */}
+            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-2xl">
+              {/* Main Kiosk Image */}
+              <div className="relative mx-auto aspect-[3/4] max-w-md">
+                <Image
+                  src="/kiosk.png"
+                  alt="PAX SK700 Self-Service Kiosk"
+                  fill
+                  className="object-contain drop-shadow-2xl transition-transform hover:scale-105"
+                  priority
+                />
 
-            {/* Main Kiosk Image */}
-            <div className="relative mx-auto aspect-[3/4] max-w-md">
-              <Image
-                src="/kiosk.png"
-                alt="PAX SK700 Self-Service Kiosk"
-                fill
-                className="object-contain drop-shadow-2xl"
-                priority
-              />
+                {/* Gradient Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-orange-100/60 via-transparent to-transparent rounded-b-3xl" />
+              </div>
 
-              {/* Gradient Overlay at Bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-orange-100/80 to-transparent rounded-b-3xl" />
+              {/* Stats Overlay */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ delay: 0.8 }}
+                className="absolute bottom-8 left-8 right-8"
+              >
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-white bg-white/80 p-4 text-center backdrop-blur-md shadow-lg">
+                    <div className="text-2xl font-black text-orange-600">24/7</div>
+                    <div className="text-xs font-semibold text-slate-600">Operation</div>
+                  </div>
+                  <div className="rounded-xl border border-white bg-white/80 p-4 text-center backdrop-blur-md shadow-lg">
+                    <div className="text-2xl font-black text-orange-600">-60%</div>
+                    <div className="text-xs font-semibold text-slate-600">Labor Cost</div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
 
             {/* Product Badge */}
-            <div className="mt-8 text-right">
-              <span className="inline-block rounded-full bg-gradient-to-r from-orange-100 to-orange-200 px-6 py-3 text-xl font-bold text-[#E77724] shadow-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.6 }}
+              className="mt-6 text-center"
+            >
+              <span className="inline-block rounded-full bg-gradient-to-r from-orange-100 via-red-100 to-pink-100 px-8 py-4 text-2xl font-black text-orange-600 shadow-lg">
                 PAX SK700
               </span>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

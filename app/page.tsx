@@ -12,6 +12,7 @@ import AIShowcase from '@/components/AIShowcase';
 import WhoWeServe from '@/components/WhoWeServe';
 import HandheldPOS from '@/components/sections/HandheldPOS';
 import SelfServiceKiosk from '@/components/sections/SelfServiceKiosk';
+import MobileApps from '@/components/sections/MobileApps';
 
 export default function Home() {
   return (
@@ -45,6 +46,7 @@ export default function Home() {
 
         {/* 8. CTA: The final, decisive call to action before the footer. */}
         <CTA />
+        <MobileApps />
       </main>
     </>
   );

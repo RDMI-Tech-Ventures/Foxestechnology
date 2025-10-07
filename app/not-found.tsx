@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Home, Search, Map, AlertCircle } from 'lucide-react';
 
 const BRAND_COLOR_PRIMARY = "bg-red-600";
@@ -23,6 +24,21 @@ export default function NotFound() {
 
             <div className="relative flex min-h-screen items-center justify-center px-6 py-20">
                 <div className="w-full max-w-4xl text-center">
+                    {/* Logo */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="mb-8"
+                    >
+                        <Image
+                            src="/foxes1.png"
+                            alt="Foxes Technology"
+                            width={150}
+                            height={150}
+                            className="mx-auto opacity-80"
+                        />
+                    </motion.div>
                     {/* Animated 404 */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
