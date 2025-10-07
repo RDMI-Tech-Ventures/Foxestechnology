@@ -437,8 +437,8 @@ const DeviceMockup = ({ isInView }: { isInView: boolean }) => {
 
       {/* Floating Stats Cards - 2x Smaller - Desktop Only */}
       <div className="hidden lg:block">
-        <FloatingCard variants={cardVariants(0)} className="absolute -left-8 top-12 w-28 xl:-left-16">
-          <div className="flex items-start justify-between">
+<FloatingCard variants={cardVariants(0)} className="absolute -left-8 top-32 w-28 xl:-left-16">
+            <div className="flex items-start justify-between">
             <div>
               <div className="text-xl font-black text-slate-900"><Counter value={500} /></div>
               <div className="mt-0.5 text-[0.65rem] font-bold text-slate-600">Active Operators</div>
