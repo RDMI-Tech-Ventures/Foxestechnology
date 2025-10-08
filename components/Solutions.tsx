@@ -31,7 +31,7 @@ const solutionsData = [
             "Live inventory synchronization",
             "Perfect for field sales teams"
         ],
-        image: "/pos.png",
+        image: "/pos1.png",
         link: "/solutions/pos-hardware",
         color: "from-green-500 to-green-600"
     },
@@ -45,7 +45,7 @@ const solutionsData = [
             "Reduce staff workload",
             "Integrated payment system"
         ],
-        image: "/images/solutions/kiosk.png",
+        image: "/pos.png",
         link: "/solutions/kiosk",
         color: "from-purple-500 to-purple-600"
     },
@@ -59,7 +59,7 @@ const solutionsData = [
             "Multi-language support",
             "Predictive analytics"
         ],
-        image: "/images/solutions/ai-bot.png",
+        image: "/images/3.png",
         link: "/solutions/ai",
         color: "from-orange-500 to-red-600"
     },
@@ -73,7 +73,7 @@ const solutionsData = [
             "Customer behavior tracking",
             "Revenue optimization tools"
         ],
-        image: "/images/solutions/analytics.png",
+        image: "/images/6.png",
         link: "/solutions/analytics",
         color: "from-cyan-500 to-blue-600"
     },

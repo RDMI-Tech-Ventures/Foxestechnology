@@ -10,13 +10,13 @@ const ecosystemData = [
         id: 0,
         title: "Take payments, everywhere",
         description: "Sell anything in person, online, or on the go with a point of sale platform that syncs your entire operation in real-time. One central hub for every transaction.",
-        image: "/foxes1.png"
+        image: "/images/1.png"
     },
     {
         id: 1,
         title: "Manage your entire operation",
         description: "From live inventory and resource scheduling to guest manifests and channel management, our central dashboard gives you a complete, top-down view of your business.",
-        image: "/hero2.png"
+        image: "/images/5.png"
     },
     {
         id: 2,
@@ -44,7 +44,7 @@ export default function Ecosystem() {
                         <div className="relative aspect-[4/3] w-full">
                              {/* Base Laptop */}
                             <Image
-                                src="/dash.png"
+                                src="/images/6.png"
                                 alt="Dashboard on a laptop"
                                 fill
                                 className="object-contain"

@@ -28,7 +28,7 @@ const solutions = [
         icon: Globe,
         tagline: "Sell 24/7 on autopilot",
         description: "Transform your website into a powerful booking machine. Accept reservations, manage inventory, and process payments automatically.",
-        image: "/images/solutions/online-booking.png",
+        image: "/foxes1.png",
         color: "from-blue-500 to-blue-600",
         link: "/solutions/online-booking",
         stats: [
@@ -48,7 +48,7 @@ const solutions = [
         icon: Smartphone,
         tagline: "Sell anywhere, anytime",
         description: "Empower your team with PAX A920 Pro handheld terminals. Secure payments, live inventory sync, and all-day battery life.",
-        image: "/images/solutions/pos-handheld.png",
+        image: "/images/1.png",
         color: "from-green-500 to-green-600",
         link: "/solutions/pos-hardware",
         stats: [
@@ -68,7 +68,7 @@ const solutions = [
         icon: Server,
         tagline: "24/7 automated sales",
         description: "Deploy PAX SK700 self-service kiosks. Reduce queues, lower costs, and serve customers around the clock.",
-        image: "/images/solutions/kiosk.png",
+        image: "/images/2.png",
         color: "from-purple-500 to-purple-600",
         link: "/solutions/kiosk",
         stats: [
@@ -88,7 +88,7 @@ const solutions = [
         icon: Bot,
         tagline: "Automate customer service",
         description: "FoxesBOT provides instant answers, personalized recommendations, and 24/7 support powered by advanced AI.",
-        image: "/images/solutions/ai-bot.png",
+        image: "/images/3.png",
         color: "from-orange-500 to-red-600",
         link: "/solutions/ai",
         stats: [
@@ -108,7 +108,7 @@ const solutions = [
         icon: BarChart3,
         tagline: "Data-driven decisions",
         description: "Track performance, understand customers, and optimize revenue with powerful real-time analytics.",
-        image: "/images/solutions/analytics.png",
+        image: "/images/4.png",
         color: "from-cyan-500 to-blue-600",
         link: "/solutions/analytics",
         stats: [
