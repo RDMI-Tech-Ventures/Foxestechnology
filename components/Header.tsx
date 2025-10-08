@@ -32,7 +32,7 @@ export default function Header() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { href: '/features', label: 'Features' },
@@ -47,7 +47,7 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-blue-950/80 backdrop-blur-xl shadow-lg shadow-blue-900/20 border-b border-blue-800/30'
+            ? 'bg-gradient-to-b from-black/30 via-black/20 to-transparent backdrop-blur-3xl shadow-2xl shadow-black/20 border-b border-white/5'
             : 'bg-transparent'
         }`}
       >
@@ -55,14 +55,14 @@ export default function Header() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="group relative flex items-center transition-opacity hover:opacity-80">
-            <Image
-  src="/footerlogo.png"
-  alt="Foxes Technology"
-  width={240}
-  height={65}
-  className="h-14 w-auto transition-transform group-hover:scale-105 lg:h-16"
-  priority
-/>
+              <Image
+                src="/logo.png"
+                alt="Foxes Technology"
+                width={240}
+                height={65}
+                className="h-14 w-auto transition-transform group-hover:scale-105 lg:h-16"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -73,10 +73,10 @@ export default function Header() {
                   href={link.href}
                   className={`group relative px-4 py-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
                     isScrolled 
-                      ? 'text-white hover:text-white hover:bg-blue-800/30' 
-                      : 'text-white hover:bg-white/10'
+                      ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20' 
+                      : 'text-white hover:bg-white/10 drop-shadow-lg'
                   }`}
-                  style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
+                  style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
                 >
                   {link.label}
                   <span className={`absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 ${BRAND_COLOR_PRIMARY} transition-all duration-300 group-hover:w-1/2`}></span>
@@ -90,10 +90,10 @@ export default function Header() {
                 href="/login"
                 className={`px-4 py-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
                   isScrolled 
-                    ? 'text-white hover:text-white hover:bg-blue-800/30' 
-                    : 'text-white hover:bg-white/10'
+                    ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20' 
+                    : 'text-white hover:bg-white/10 drop-shadow-lg'
                 }`}
-                style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
+                style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
               >
                 Log in
               </Link>
@@ -112,10 +112,10 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden p-2 rounded-xl transition-all ${
                 isScrolled 
-                  ? 'hover:bg-blue-800/30 text-white' 
-                  : 'hover:bg-white/10 text-white'
+                  ? 'hover:bg-white/20 text-slate-900' 
+                  : 'hover:bg-white/10 text-white drop-shadow-lg'
               }`}
-              style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
+              style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (

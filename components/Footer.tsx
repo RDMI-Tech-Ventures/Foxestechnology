@@ -26,7 +26,7 @@ const FooterLinkColumn = ({ title, links }: { title: string, links: { name: stri
     <h3 className="mb-5 text-sm font-bold uppercase tracking-widest text-slate-900">{title}</h3>
     <ul role="list" className="space-y-3">
       {links.map((item, index) => (
-        <motion.li 
+        <motion.li
           key={item.name}
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -101,7 +101,7 @@ const NewsletterSignup = () => {
       {/* Decorative Elements */}
       <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-orange-400/20 blur-2xl"></div>
-      
+
       <div className="relative">
         <div className="mb-4 flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
@@ -112,11 +112,11 @@ const NewsletterSignup = () => {
             <p className="text-sm font-medium text-white/80">Get exclusive insights</p>
           </div>
         </div>
-        
+
         <p className="mb-5 text-sm leading-relaxed text-white/90">
           Join 500+ operators receiving weekly tips, industry news, and product updates.
         </p>
-        
+
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="relative">
             <input
@@ -159,7 +159,7 @@ const AppButtons = () => (
         <p className="text-base font-bold text-slate-900">App Store</p>
       </div>
     </motion.a>
-    
+
     <motion.a
       href="#"
       whileHover={{ scale: 1.02, y: -2 }}
@@ -228,7 +228,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <footer className="relative overflow-hidden bg-[#F7F7F7]">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
         backgroundImage: `radial-gradient(circle at 2px 2px, rgb(15 23 42) 1px, transparent 0)`,
@@ -236,13 +236,13 @@ export default function Footer() {
       }}></div>
 
       <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-        
+
         {/* Top Section: Logo + Description + Newsletter */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="space-y-6">
             <FoxesLogo />
             <p className="max-w-md text-base leading-relaxed text-slate-600">
-              The all-in-one operating system for modern tours, activities, and attractions. 
+              The all-in-one operating system for modern tours, activities, and attractions.
               Trusted by 500+ operators across Egypt and the GCC.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -266,7 +266,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          
+
           <div>
             <NewsletterSignup />
           </div>
@@ -280,7 +280,7 @@ export default function Footer() {
           <FooterLinkColumn title="Solutions" links={solutionsLinks} />
           <FooterLinkColumn title="Company" links={companyLinks} />
           <FooterLinkColumn title="Resources" links={resourcesLinks} />
-          
+
           {/* App Downloads + Partner Badge */}
           <div className="col-span-2 space-y-6">
             <div>
@@ -313,7 +313,7 @@ export default function Footer() {
               ))}
             </div>
           </div>
-          
+
           <SocialLinks />
         </div>
 

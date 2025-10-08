@@ -138,7 +138,7 @@ function SolutionHero() {
                         <div className="relative">
                             <div className="overflow-hidden rounded-2xl border-2 border-white/10 shadow-2xl">
                                 <Image
-                                    src="/images/solutions/dashboard-main.png"
+                                    src="/foxeshero.png"
                                     alt="Foxes Technology Booking Dashboard"
                                     width={1200}
                                     height={800}
