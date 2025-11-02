@@ -74,7 +74,19 @@ export const searchableContent = [
     image: '/images/analytics.jpg'
   },
 
-  // Features
+  // Features Page
+  {
+    objectID: 'features',
+    title: 'All Features - Everything You Need',
+    description: 'Complete feature set for tour operators: 100+ features including booking, payments, CRM, analytics, and 50+ integrations',
+    content: 'Comprehensive platform features: online booking 24/7, all payment methods, customer management, inventory tracking, staff management, real-time analytics, POS hardware, AI assistant, and integrations with QuickBooks, Stripe, WhatsApp, and 50+ other tools.',
+    url: '/features',
+    category: 'features',
+    tags: ['features', 'complete', 'all-in-one', 'comprehensive', 'platform'],
+    image: '/images/features.jpg'
+  },
+
+  // Individual Features
   {
     objectID: 'feature-real-time-booking',
     title: 'Real-time Availability & Booking',
