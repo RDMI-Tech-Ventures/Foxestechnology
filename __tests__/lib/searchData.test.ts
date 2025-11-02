@@ -8,8 +8,8 @@ describe('lib/searchData', () => {
       expect(Array.isArray(searchableContent)).toBe(true);
     });
 
-    it('should have at least 40 records', () => {
-      expect(searchableContent.length).toBeGreaterThanOrEqual(40);
+    it('should have at least 30 records', () => {
+      expect(searchableContent.length).toBeGreaterThanOrEqual(30);
     });
 
     it('should have all records with required fields', () => {

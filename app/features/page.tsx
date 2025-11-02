@@ -114,7 +114,7 @@ function HeroSection() {
                         <span className="block text-white drop-shadow-2xl">
                             Built for
                         </span>
-                        <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-gradient">
+                        <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
                             Excellence
                         </span>
                     </motion.h1>
