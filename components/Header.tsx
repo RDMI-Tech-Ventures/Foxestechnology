@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, ChevronRight, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronRight, ArrowRight, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SearchBar from './SearchBar';
 
 const BRAND_COLOR_PRIMARY = "bg-red-600";
 const BRAND_HOVER_PRIMARY = "hover:bg-red-700";
@@ -12,6 +13,7 @@ const BRAND_HOVER_PRIMARY = "hover:bg-red-700";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +35,24 @@ export default function Header() {
       document.body.style.overflow = 'unset';
     };
   }, [isMobileMenuOpen]);
+
+  // Keyboard shortcuts for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // CMD+K or CTRL+K to open search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+      // ESC to close search
+      if (e.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
 
   const navLinks = [
     { href: '/features', label: 'Features' },
@@ -86,11 +106,23 @@ export default function Header() {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className={`p-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
+                  isScrolled
+                    ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20'
+                    : 'text-white hover:bg-white/10 drop-shadow-lg'
+                }`}
+                style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </button>
               <Link
                 href="/login"
                 className={`px-4 py-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
-                  isScrolled 
-                    ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20' 
+                  isScrolled
+                    ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20'
                     : 'text-white hover:bg-white/10 drop-shadow-lg'
                 }`}
                 style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
@@ -127,6 +159,53 @@ export default function Header() {
           </div>
         </div>
       </header>
+
+      {/* Search Modal */}
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-start justify-center pt-32 px-4"
+          >
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"
+              onClick={() => setIsSearchOpen(false)}
+            />
+
+            {/* Search Content */}
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              className="relative w-full max-w-3xl"
+            >
+              <div className="bg-white rounded-2xl shadow-2xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-bold text-gray-900">Search</h3>
+                  <button
+                    onClick={() => setIsSearchOpen(false)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+                <SearchBar />
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-500">
+                    Press <kbd className="px-2 py-1 bg-gray-100 rounded text-xs font-mono">ESC</kbd> to close
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Full-Screen Mobile Menu */}
       <AnimatePresence>
