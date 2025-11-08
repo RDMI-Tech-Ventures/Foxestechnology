@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Bot, MessageSquare, Sparkles, Zap, Globe, Clock, TrendingUp, ArrowRight } from 'lucide-react';
@@ -34,17 +33,17 @@ export default function AIShowcase() {
 
     return (
         <section className="relative overflow-hidden py-20 sm:py-28">
-            {/* Background Image with Gradient Overlay */}
+            {/* Background with Heavy Glassmorphism Effect */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/images/1.png"
                     alt="AI Background"
                     fill
-                    className="object-cover"
+                    className="object-cover opacity-30"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-white/98 via-orange-50/95 to-white/98"></div>
-                <div className="absolute inset-0 backdrop-blur-[2px]"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-white/98 via-orange-50/98 to-white/98"></div>
+                <div className="absolute inset-0 backdrop-blur-3xl"></div>
             </div>
 
             {/* Pattern Overlay */}
@@ -61,25 +60,13 @@ export default function AIShowcase() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[32rem] w-[32rem] rounded-full bg-blue-200/20 blur-3xl z-0"></div>
 
             <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-                
+
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center"
-                >
-                    <motion.div
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-300/50 bg-orange-100/60 px-5 py-2.5 backdrop-blur-xl shadow-lg"
-                    >
+                <div className="text-center animate-fade-in">
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-300/50 bg-orange-100/60 px-5 py-2.5 backdrop-blur-xl shadow-lg">
                         <Sparkles className="h-5 w-5 text-orange-600" />
                         <span className="text-sm font-bold text-orange-900">AI-Powered Intelligence</span>
-                    </motion.div>
+                    </div>
 
                     <h2 className="text-4xl font-black text-slate-900 sm:text-5xl lg:text-6xl">
                         Meet
@@ -92,16 +79,10 @@ export default function AIShowcase() {
                         Your AI assistant that transforms Egyptian tourism operations with 24/7 multilingual support,
                         smart recommendations, and predictive analytics—helping you serve more guests while reducing costs.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* FoxesBot Showcase */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="mt-16"
-                >
+                <div className="mt-16">
                     <div className="relative mx-auto max-w-2xl">
                         {/* Enhanced Glow Effect */}
                         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-orange-300/40 via-red-300/40 to-orange-300/40 blur-3xl"></div>
@@ -109,17 +90,7 @@ export default function AIShowcase() {
 
                         {/* FoxesBot Image Container with Glass Effect */}
                         <div className="relative rounded-3xl border border-white/40 bg-white/20 p-8 backdrop-blur-sm shadow-2xl">
-                            <motion.div
-                                animate={{
-                                    y: [0, -20, 0],
-                                }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                                className="relative mx-auto w-full max-w-md"
-                            >
+                            <div className="relative mx-auto w-full max-w-md animate-float">
                                 <Image
                                     src="/botfox.png"
                                     alt="FoxesBot - AI-Powered Travel Assistant"
@@ -128,62 +99,28 @@ export default function AIShowcase() {
                                     className="w-full drop-shadow-2xl"
                                     priority
                                 />
-                            </motion.div>
-
-                            {/* Enhanced Floating Particles */}
-                            {[...Array(5)].map((_, i) => (
-                                <motion.div
-                                    key={i}
-                                    className="absolute rounded-full bg-gradient-to-r from-orange-400 to-red-400 shadow-lg"
-                                    style={{
-                                        width: `${8 + i * 2}px`,
-                                        height: `${8 + i * 2}px`,
-                                        top: `${15 + i * 20}%`,
-                                        left: `${5 + i * 18}%`,
-                                    }}
-                                    animate={{
-                                        y: [0, -40, 0],
-                                        opacity: [0.4, 1, 0.4],
-                                        scale: [1, 1.2, 1],
-                                    }}
-                                    transition={{
-                                        duration: 3 + i * 0.5,
-                                        repeat: Infinity,
-                                        delay: i * 0.3,
-                                    }}
-                                />
-                            ))}
+                            </div>
                         </div>
 
                         {/* FoxesBot Branding */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 }}
-                            className="mt-8 text-center"
-                        >
+                        <div className="mt-8 text-center">
                             <p className="text-xl font-bold text-slate-800">
                                 Serving Egyptian Tourism{' '}
                                 <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                                     24/7 in Arabic & English
                                 </span>
                             </p>
-                        </motion.div>
+                        </div>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Features Grid */}
                 <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     {features.map((feature, index) => (
-                        <motion.div
+                        <div
                             key={feature.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -8, scale: 1.02 }}
-                            className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 p-6 shadow-xl backdrop-blur-xl transition-all hover:border-orange-300 hover:shadow-2xl hover:bg-white/80"
+                            className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 p-6 shadow-xl backdrop-blur-xl transition-all hover:border-orange-300 hover:shadow-2xl hover:bg-white/80 hover:-translate-y-2 animate-fade-in"
+                            style={{ animationDelay: `${index * 100}ms` }}
                         >
                             {/* Glassmorphism layers */}
                             <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent opacity-50"></div>
@@ -196,49 +133,31 @@ export default function AIShowcase() {
                                 <h4 className="mt-4 text-lg font-black text-slate-900">{feature.title}</h4>
                                 <p className="mt-2 text-sm leading-relaxed text-slate-700">{feature.description}</p>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
                 {/* CTA Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-16 text-center"
-                >
+                <div className="mt-16 text-center">
                     <div className="inline-flex flex-col gap-4 sm:flex-row">
                         <Link href="/solutions/ai">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 text-base font-bold text-white shadow-2xl shadow-orange-500/30 transition-all hover:shadow-orange-500/50"
-                            >
+                            <button className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 text-base font-bold text-white shadow-2xl shadow-orange-500/30 transition-all hover:shadow-orange-500/50 hover:scale-105 active:scale-95">
                                 <span className="relative z-10">Explore FoxesBot</span>
                                 <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
                                 <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-600 opacity-0 transition-opacity group-hover:opacity-100"></div>
-                            </motion.button>
+                            </button>
                         </Link>
                         <Link href="/demo">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="inline-flex items-center gap-2 rounded-full border border-slate-300/50 bg-white/80 px-8 py-4 text-base font-bold text-slate-900 shadow-lg backdrop-blur-xl transition-all hover:border-slate-400 hover:bg-white hover:shadow-xl"
-                            >
+                            <button className="inline-flex items-center gap-2 rounded-full border border-slate-300/50 bg-white/80 px-8 py-4 text-base font-bold text-slate-900 shadow-lg backdrop-blur-xl transition-all hover:border-slate-400 hover:bg-white hover:shadow-xl hover:scale-105 active:scale-95">
                                 <Bot className="h-5 w-5" />
                                 <span>See Demo</span>
-                            </motion.button>
+                            </button>
                         </Link>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Stats Bar */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="relative mt-16 rounded-3xl border border-white/60 bg-white/70 p-10 shadow-2xl backdrop-blur-2xl overflow-hidden"
-                >
+                <div className="relative mt-16 rounded-3xl border border-white/60 bg-white/70 p-10 shadow-2xl backdrop-blur-2xl overflow-hidden">
                     {/* Glass effect layers */}
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/50 via-white/30 to-transparent"></div>
 
@@ -248,12 +167,8 @@ export default function AIShowcase() {
                             { value: "98%", label: "Satisfaction Rate", subtext: "From travelers", icon: Sparkles },
                             { value: "<1s", label: "Response Time", subtext: "Average", icon: Zap },
                         ].map((stat, index) => (
-                            <motion.div
+                            <div
                                 key={index}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
                                 className="relative text-center group"
                             >
                                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg mb-4 group-hover:scale-110 transition-transform">
@@ -262,10 +177,10 @@ export default function AIShowcase() {
                                 <div className="text-5xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">{stat.value}</div>
                                 <div className="mt-2 text-base font-bold text-slate-900">{stat.label}</div>
                                 <div className="mt-1 text-sm text-slate-600">{stat.subtext}</div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

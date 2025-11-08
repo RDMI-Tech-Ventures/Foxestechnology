@@ -40,6 +40,37 @@ html {
   animation: shimmer 8s infinite;
 }
 
+/* Float Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Fade In Animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+  opacity: 0;
+}
+
 /* Algolia Search Highlight Styling */
 mark {
   @apply bg-gradient-to-r from-red-100 to-orange-100 text-red-900 font-semibold px-1 rounded;

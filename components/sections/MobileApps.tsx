@@ -1,42 +1,13 @@
 // components/sections/MobileApps.tsx
 'use client';
 
-import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-import { Smartphone, Zap } from 'lucide-react';
+import { Smartphone } from 'lucide-react';
 
 export default function MobileApps() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
   return (
-    <section ref={ref} className="relative overflow-hidden py-20 lg:py-32">
+    <section className="relative overflow-hidden py-20 lg:py-32">
       {/* Background with Heavy Glassmorphism Effect */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -63,56 +34,36 @@ export default function MobileApps() {
       <div className="absolute bottom-0 right-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-tr from-orange-300/20 to-amber-300/30 blur-3xl z-0"></div>
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="text-center"
-        >
+        <div className="text-center animate-fade-in">
           {/* Badge with Enhanced Glass */}
-          <motion.div
-            variants={itemVariants}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-300/50 bg-teal-100/60 px-5 py-2.5 shadow-lg backdrop-blur-xl"
-          >
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-300/50 bg-teal-100/60 px-5 py-2.5 shadow-lg backdrop-blur-xl">
             <Smartphone className="h-5 w-5 text-teal-600" />
             <span className="text-sm font-bold text-teal-900">Mobile Business Management</span>
-          </motion.div>
+          </div>
 
           {/* Title */}
-          <motion.h2
-            variants={itemVariants}
-            className="mb-8 text-4xl font-black leading-tight text-slate-900 sm:text-5xl lg:text-6xl"
-          >
+          <h2 className="mb-8 text-4xl font-black leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Manage Your Egyptian{' '}
             <span className="block mt-2 bg-gradient-to-r from-teal-600 via-cyan-600 to-orange-600 bg-clip-text text-transparent">
               Tours from Anywhere
             </span>
-          </motion.h2>
+          </h2>
 
           {/* Description */}
-        <motion.p
-  variants={itemVariants}
-  className="mx-auto mb-16 max-w-4xl text-lg leading-relaxed text-slate-700 lg:text-xl"
->
-  Take control of your Egyptian tour business from Cairo to Aswan. The{' '}
-  <span className="font-bold text-slate-900">Foxes Technology App</span>{' '}
-  delivers complete booking management, mobile payment processing, and real-time analytics
-  on your phone—manage operations from Luxor temple tours to Red Sea excursions, anytime, anywhere.
-</motion.p>
+          <p className="mx-auto mb-16 max-w-4xl text-lg leading-relaxed text-slate-700 lg:text-xl">
+            Take control of your Egyptian tour business from Cairo to Aswan. The{' '}
+            <span className="font-bold text-slate-900">Foxes Technology App</span>{' '}
+            delivers complete booking management, mobile payment processing, and real-time analytics
+            on your phone—manage operations from Luxor temple tours to Red Sea excursions, anytime, anywhere.
+          </p>
 
           {/* Available On Label */}
-          <motion.h3
-            variants={itemVariants}
-            className="mb-12 text-2xl font-black text-slate-900 sm:text-3xl"
-          >
+          <h3 className="mb-12 text-2xl font-black text-slate-900 sm:text-3xl">
             Download Now
-          </motion.h3>
+          </h3>
 
           {/* App Store Badges with Glass Effect */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8"
-          >
+          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8">
             {/* Google Play Badge */}
             <Link
               href="https://play.google.com/store/apps/details?id=com.foxestechnology&hl=en"
@@ -120,15 +71,10 @@ export default function MobileApps() {
               rel="noopener noreferrer"
               className="group"
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="relative h-16 w-56 overflow-hidden rounded-xl border border-white/60 shadow-2xl backdrop-blur-xl transition-shadow duration-300 group-hover:shadow-2xl group-hover:border-teal-300 sm:h-20 sm:w-64"
-              >
+              <div className="relative h-16 w-56 overflow-hidden rounded-xl border border-white/60 shadow-2xl backdrop-blur-xl transition-all duration-300 group-hover:shadow-2xl group-hover:border-teal-300 group-hover:scale-105 group-hover:-translate-y-1 sm:h-20 sm:w-64 active:scale-95">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent"></div>
                 <GooglePlayBadge />
-              </motion.div>
+              </div>
             </Link>
 
             {/* App Store Badge */}
@@ -138,23 +84,15 @@ export default function MobileApps() {
               rel="noopener noreferrer"
               className="group"
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="relative h-16 w-56 overflow-hidden rounded-xl border border-white/60 shadow-2xl backdrop-blur-xl transition-shadow duration-300 group-hover:shadow-2xl group-hover:border-teal-300 sm:h-20 sm:w-64"
-              >
+              <div className="relative h-16 w-56 overflow-hidden rounded-xl border border-white/60 shadow-2xl backdrop-blur-xl transition-all duration-300 group-hover:shadow-2xl group-hover:border-teal-300 group-hover:scale-105 group-hover:-translate-y-1 sm:h-20 sm:w-64 active:scale-95">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent"></div>
                 <AppStoreBadge />
-              </motion.div>
+              </div>
             </Link>
-          </motion.div>
+          </div>
 
           {/* QR Codes for Desktop */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-16 hidden lg:block"
-          >
+          <div className="mt-16 hidden lg:block">
             <p className="mb-6 text-sm font-bold text-slate-700">
               Scan to download
             </p>
@@ -181,8 +119,8 @@ export default function MobileApps() {
                 <div className="text-sm font-bold text-slate-900">iOS</div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Bottom Accent Line */}
