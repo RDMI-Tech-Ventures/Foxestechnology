@@ -8,9 +8,9 @@
  * NEXT_PUBLIC_ALGOLIA_INDEX_NAME
  */
 
-import { algoliasearch } from 'algoliasearch';
+import algoliasearch from 'algoliasearch';
 import { searchableContent } from '../lib/searchData';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
@@ -31,43 +31,40 @@ async function uploadToAlgolia() {
     console.log(`📊 Uploading ${searchableContent.length} records to index: ${ALGOLIA_INDEX_NAME}`);
 
     // Initialize Algolia client with admin API key
-    const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY);
+    const client = algoliasearch(ALGOLIA_APP_ID!, ALGOLIA_ADMIN_API_KEY!);
+    const index = client.initIndex(ALGOLIA_INDEX_NAME);
 
-    // Configure index settings for optimal search
-    await client.saveObjects({
-      indexName: ALGOLIA_INDEX_NAME,
-      objects: searchableContent,
+    // Save objects to index
+    await index.saveObjects(searchableContent, {
+      autoGenerateObjectIDIfNotExist: false,
     });
 
-    // Update settings separately in v5
-    await client.setSettings({
-      indexName: ALGOLIA_INDEX_NAME,
-      indexSettings: {
-        searchableAttributes: [
-          'title',
-          'description',
-          'content',
-          'tags',
-          'category',
-        ],
-        attributesForFaceting: [
-          'category',
-          'tags',
-        ],
-        customRanking: [
-          'desc(objectID)',
-        ],
-        highlightPreTag: '<mark>',
-        highlightPostTag: '</mark>',
-        attributesToSnippet: [
-          'content:20',
-          'description:30',
-        ],
-        snippetEllipsisText: '...',
-        queryLanguages: ['en', 'ar'],
-        removeStopWords: true,
-        typoTolerance: true,
-      }
+    // Configure index settings for optimal search
+    await index.setSettings({
+      searchableAttributes: [
+        'title',
+        'description',
+        'content',
+        'tags',
+        'category',
+      ],
+      attributesForFaceting: [
+        'category',
+        'tags',
+      ],
+      customRanking: [
+        'desc(objectID)',
+      ],
+      highlightPreTag: '<mark>',
+      highlightPostTag: '</mark>',
+      attributesToSnippet: [
+        'content:20',
+        'description:30',
+      ],
+      snippetEllipsisText: '...',
+      queryLanguages: ['en', 'ar'],
+      removeStopWords: true,
+      typoTolerance: true,
     });
 
     console.log('⚙️  Index settings configured');

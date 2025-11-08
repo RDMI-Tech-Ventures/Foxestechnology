@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "algolia:upload": "ts-node scripts/uploadToAlgolia.ts",
+    "algolia:upload": "ts-node --project tsconfig.node.json scripts/uploadToAlgolia.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
@@ -17,7 +17,7 @@
   "dependencies": {
     "@algolia/autocomplete-js": "^1.19.4",
     "@algolia/autocomplete-theme-classic": "^1.19.4",
-    "algoliasearch": "^5.42.0",
+    "algoliasearch": "^4.25.3",
     "firebase": "^11.10.0",
     "framer-motion": "^12.23.3",
     "lucide-react": "^0.544.0",

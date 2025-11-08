@@ -1,4 +1,4 @@
-import { algoliasearch } from 'algoliasearch';
+import algoliasearch from 'algoliasearch/lite';
 
 // Algolia configuration - only initialize if credentials are available
 const appId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '';
