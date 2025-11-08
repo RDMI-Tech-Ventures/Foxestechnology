@@ -167,39 +167,76 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-start justify-center pt-32 px-4"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:pt-24"
           >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"
+              className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 backdrop-blur-2xl"
               onClick={() => setIsSearchOpen(false)}
             />
 
             {/* Search Content */}
             <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              initial={{ opacity: 0, y: -30, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className="relative w-full max-w-3xl"
+              exit={{ opacity: 0, y: -30, scale: 0.9 }}
+              transition={{ type: 'spring', duration: 0.5, bounce: 0.3 }}
+              className="relative w-full max-w-4xl max-h-[85vh] flex flex-col"
             >
-              <div className="bg-white rounded-2xl shadow-2xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-bold text-gray-900">Search</h3>
-                  <button
-                    onClick={() => setIsSearchOpen(false)}
-                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    <X className="w-5 h-5 text-gray-500" />
-                  </button>
+              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-full">
+                {/* Header */}
+                <div className="relative bg-gradient-to-r from-gray-50 to-white px-6 py-5 border-b border-gray-100 flex-shrink-0">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/20">
+                        <Search className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Quick Search</h3>
+                        <p className="text-xs text-gray-500">Find solutions, features, and more</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setIsSearchOpen(false)}
+                      className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 group"
+                      aria-label="Close search"
+                    >
+                      <X className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                    </button>
+                  </div>
                 </div>
-                <SearchBar />
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <p className="text-sm text-gray-500">
-                    Press <kbd className="px-2 py-1 bg-gray-100 rounded text-xs font-mono">ESC</kbd> to close
-                  </p>
+
+                {/* Search Input and Results Area */}
+                <div className="px-6 py-6 flex-1 overflow-y-auto">
+                  <SearchBar
+                    onResultClick={() => setIsSearchOpen(false)}
+                    inline={true}
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Footer */}
+                <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex-shrink-0">
+                  <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-4 text-gray-500">
+                      <span className="flex items-center gap-1.5">
+                        <kbd className="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-mono shadow-sm">ESC</kbd>
+                        <span>to close</span>
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <kbd className="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-mono shadow-sm">↵</kbd>
+                        <span>to select</span>
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-gray-400">
+                      <span>Powered by</span>
+                      <span className="font-semibold text-blue-600">Algolia</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
