@@ -63,21 +63,23 @@ function DocsHero() {
                     </p>
 
                     <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
-                            className={`group inline-flex items-center gap-2 rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-lg transition-all ${BRAND_HOVER_PRIMARY}`}
-                        >
-                            <Search className="h-5 w-5" />
-                            <span>Search Docs</span>
-                        </motion.button>
+                        <Link href="/contact">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`group inline-flex items-center gap-2 rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-lg transition-all ${BRAND_HOVER_PRIMARY}`}
+                            >
+                                <span>Request Demo</span>
+                                <ArrowRight className="h-5 w-5" />
+                            </motion.button>
+                        </Link>
                         <Link href="/get-started">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 bg-white/10 px-8 py-4 text-base font-bold text-white backdrop-blur-md transition-all hover:border-white hover:bg-white/20"
                             >
-                                Quick Start Guide
+                                Implementation Guide
                                 <ArrowRight className="h-5 w-5" />
                             </motion.button>
                         </Link>
@@ -91,10 +93,10 @@ function DocsHero() {
 // Quick Start Section
 function QuickStart() {
     const steps = [
-        { icon: Download, title: 'Install SDK', description: 'Download and install our JavaScript/Python SDK' },
-        { icon: Code, title: 'Get API Keys', description: 'Generate your API credentials from the dashboard' },
-        { icon: Terminal, title: 'Make First Call', description: 'Test your integration with a simple API call' },
-        { icon: Zap, title: 'Go Live', description: 'Deploy to production and start processing bookings' },
+        { icon: Download, title: 'Purchase Software', description: 'Choose your package and complete purchase' },
+        { icon: Code, title: 'Installation', description: 'Our team installs and configures your system' },
+        { icon: Terminal, title: 'Training', description: 'Comprehensive training for your team' },
+        { icon: Zap, title: 'Go Live', description: 'Launch your operations with full support' },
     ];
 
     return (
@@ -107,7 +109,7 @@ function QuickStart() {
                     className="rounded-3xl bg-white p-8 shadow-2xl ring-1 ring-slate-200 lg:p-12"
                 >
                     <h2 className="text-3xl font-black text-slate-900 text-center mb-12">
-                        Get Started in 4 Steps
+                        Implementation in 4 Steps
                     </h2>
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                         {steps.map((step, index) => (

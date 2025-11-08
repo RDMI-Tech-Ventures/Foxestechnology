@@ -229,6 +229,42 @@ export const searchableContent = [
 
   // Resources
   {
+    objectID: 'documentation',
+    title: 'Documentation',
+    description: 'Comprehensive guides and API references',
+    content: 'Complete documentation for Foxes Technology booking and POS software. Includes implementation guides, API reference, tutorials, security best practices, and integration guides. SDKs available in multiple languages for custom development.',
+    url: '/docs',
+    category: 'resources',
+    tags: ['documentation', 'docs', 'guides', 'api', 'sdk', 'tutorial', 'implementation'],
+  },
+  {
+    objectID: 'api-reference',
+    title: 'API Reference',
+    description: 'RESTful API documentation for custom integrations',
+    content: 'Complete API reference for Foxes Technology software. Includes Bookings API, Payments API, Customers API, Inventory API, Analytics API, and Webhooks. RESTful design with unlimited API calls and comprehensive SDKs in JavaScript, Python, PHP, and Ruby.',
+    url: '/api-reference',
+    category: 'resources',
+    tags: ['api', 'reference', 'rest', 'webhooks', 'sdk', 'integration', 'development'],
+  },
+  {
+    objectID: 'support-center',
+    title: 'Support Center',
+    description: '24/7 support for software customers',
+    content: 'Get help with your Foxes Technology software. 24/7 live chat, email support, phone support, and video calls. Technical support included with all packages. Knowledge base, community forum, and video tutorials available. 99.98% system uptime.',
+    url: '/support',
+    category: 'resources',
+    tags: ['support', 'help', 'chat', 'phone', 'email', '24/7', 'customer service', 'technical'],
+  },
+  {
+    objectID: 'get-started',
+    title: 'Implementation Guide',
+    description: 'Implement your system in 3 steps',
+    content: 'Complete implementation guide for Foxes Technology software. Purchase and consultation, professional installation and setup by our team, comprehensive staff training, and go live. Includes on-premise, cloud, or hybrid deployment options. Full ownership and control of your system.',
+    url: '/get-started',
+    category: 'resources',
+    tags: ['get started', 'implementation', 'installation', 'setup', 'launch', 'deployment', 'training'],
+  },
+  {
     objectID: 'privacy-policy',
     title: 'Privacy Policy',
     description: 'How we protect and handle your data',

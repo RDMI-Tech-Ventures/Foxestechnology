@@ -65,14 +65,16 @@ function APIHero() {
                     </p>
 
                     <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
-                            className={`group inline-flex items-center gap-2 rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-lg transition-all ${BRAND_HOVER_PRIMARY}`}
-                        >
-                            <Key className="h-5 w-5" />
-                            <span>Get API Keys</span>
-                        </motion.button>
+                        <Link href="/contact">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`group inline-flex items-center gap-2 rounded-full ${BRAND_COLOR_PRIMARY} px-8 py-4 text-base font-bold text-white shadow-lg transition-all ${BRAND_HOVER_PRIMARY}`}
+                            >
+                                <span>Request Demo</span>
+                                <ArrowRight className="h-5 w-5" />
+                            </motion.button>
+                        </Link>
                         <Link href="/docs">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
@@ -312,9 +314,9 @@ function Authentication() {
                             Authentication
                         </h2>
                         <p className="mt-4 text-lg leading-relaxed text-slate-700">
-                            All API requests require authentication using API keys. You can generate and manage
-                            your API keys from the dashboard. Always keep your secret keys secure and never
-                            share them publicly.
+                            All API requests require authentication using API keys. Your API keys are generated
+                            during software installation and can be managed through the admin dashboard.
+                            Always keep your secret keys secure and never share them publicly.
                         </p>
                         <div className="mt-8 space-y-4">
                             <div className="flex items-start gap-4">
@@ -375,8 +377,8 @@ const bookings = await client.bookings.list();`}
 // Rate Limits
 function RateLimits() {
     const limits = [
-        { tier: 'Free', requests: '1,000', rate: '10 req/sec', features: ['Basic support', 'Standard SLA'] },
-        { tier: 'Pro', requests: '100,000', rate: '100 req/sec', features: ['Priority support', '99.9% SLA'] },
+        { tier: 'Standard', requests: 'Unlimited', rate: '100 req/sec', features: ['Email support', 'Standard SLA'] },
+        { tier: 'Professional', requests: 'Unlimited', rate: '500 req/sec', features: ['Priority support', '99.9% SLA'] },
         { tier: 'Enterprise', requests: 'Unlimited', rate: 'Custom', features: ['Dedicated support', '99.99% SLA'] },
     ];
 
