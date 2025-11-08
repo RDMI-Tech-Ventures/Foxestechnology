@@ -40,7 +40,7 @@ export default function MobileApps() {
       {/* Background with Heavy Glassmorphism Effect */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80"
+          src="/hero2.png"
           alt="Mobile technology background"
           fill
           className="object-cover opacity-30"

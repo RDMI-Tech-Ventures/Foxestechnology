@@ -16,7 +16,7 @@ export default function SelfServiceKiosk() {
       {/* Background with Heavy Glassmorphism Effect */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1551135049-8a33b5883817?w=1920&q=80"
+          src="/image4.png"
           alt="Modern technology background"
           fill
           className="object-cover opacity-30"

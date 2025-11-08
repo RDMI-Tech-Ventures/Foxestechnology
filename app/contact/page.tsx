@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Building, ArrowRight, Send, CheckCircle, Clock, Users, MessageSquare } from 'lucide-react';
 
@@ -23,18 +24,31 @@ export default function ContactPage() {
 // 1. Enhanced Hero Section
 function ContactHero() {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-32 pb-20 lg:pt-40 lg:pb-28">
+        <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28">
+            {/* Background with Heavy Glassmorphism Effect */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/hero2.png"
+                    alt="Modern office background"
+                    fill
+                    className="object-cover opacity-30"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-950/98 via-slate-900/98 to-slate-950/98"></div>
+                <div className="absolute inset-0 backdrop-blur-3xl"></div>
+            </div>
+
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0 z-0 opacity-[0.05]">
                 <div className="absolute inset-0" style={{
                     backgroundImage: `radial-gradient(circle at 2px 2px, rgb(239 68 68) 1px, transparent 0)`,
-                    backgroundSize: '48px 48px'
+                    backgroundSize: '32px 32px'
                 }}></div>
             </div>
 
             {/* Gradient Orbs */}
-            <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-red-500/20 blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl"></div>
+            <div className="absolute top-0 right-0 h-[32rem] w-[32rem] rounded-full bg-red-500/20 blur-3xl z-0"></div>
+            <div className="absolute bottom-0 left-0 h-[32rem] w-[32rem] rounded-full bg-blue-500/10 blur-3xl z-0"></div>
 
             <div className="relative mx-auto max-w-7xl px-6 text-center lg:px-8">
                 <motion.div
@@ -58,8 +72,8 @@ function ContactHero() {
 
                     <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-300 lg:text-xl"
                        style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)' }}>
-                        Have a question about our platform? Need a demo? Want to discuss a partnership? 
-                        Our team is here to help you transform your travel business.
+                        Ready to digitize your Egyptian tour business? Need a demo? Want to discuss how we can help?
+                        Our team of tourism technology specialists is here to transform your operations from Cairo to the Red Sea.
                     </p>
 
                     {/* Quick Stats */}
@@ -94,44 +108,69 @@ function ContactHero() {
 
 // 2. Enhanced Contact Methods
 const contactMethods = [
-    { 
-        name: 'General Inquiries', 
-        icon: Mail, 
-        detail: 'info@foxestechnology.com', 
+    {
+        name: 'General Inquiries',
+        icon: Mail,
+        detail: 'info@foxestechnology.com',
         href: 'mailto:info@foxestechnology.com',
-        description: 'For general questions and information',
+        description: 'Questions about digitizing Egyptian tours',
         color: 'from-blue-500 to-blue-600'
     },
-    { 
-        name: 'Sales Department', 
-        icon: Building, 
-        detail: 'sales@foxestechnology.com', 
+    {
+        name: 'Sales Department',
+        icon: Building,
+        detail: 'sales@foxestechnology.com',
         href: 'mailto:sales@foxestechnology.com',
-        description: 'Discuss pricing and packages',
+        description: 'Pricing for Egyptian tour operators',
         color: 'from-red-500 to-red-600'
     },
-    { 
-        name: 'Phone Support', 
-        icon: Phone, 
-        detail: '+20 115 385 5556', 
+    {
+        name: 'Phone Support',
+        icon: Phone,
+        detail: '+20 115 385 5556',
         href: 'tel:+201153855556',
-        description: 'Available Mon-Fri, 9AM-6PM',
+        description: 'Cairo office: Mon-Fri, 9AM-6PM EET',
         color: 'from-green-500 to-green-600'
     },
-    { 
-        name: 'Visit Our Office', 
-        icon: MapPin, 
-        detail: 'Cairo, Egypt', 
+    {
+        name: 'Visit Our Office',
+        icon: MapPin,
+        detail: 'Cairo, Egypt',
         href: '#office-info',
-        description: 'Book a meeting at our HQ',
+        description: 'Meet our team in Cairo',
         color: 'from-purple-500 to-purple-600'
     },
 ];
 
 function ContactMethods() {
     return (
-        <section className="relative bg-gradient-to-b from-white to-slate-50 py-20 sm:py-28">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <section className="relative overflow-hidden py-20 sm:py-28">
+            {/* Background with Heavy Glassmorphism Effect */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/hero2.png"
+                    alt="Business communication background"
+                    fill
+                    className="object-cover opacity-30"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/98 via-slate-50/98 to-white/98"></div>
+                <div className="absolute inset-0 backdrop-blur-3xl"></div>
+            </div>
+
+            {/* Subtle Pattern Overlay */}
+            <div className="absolute inset-0 z-0 opacity-[0.03]">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 2px 2px, rgb(239 68 68) 1px, transparent 0)`,
+                    backgroundSize: '32px 32px'
+                }}></div>
+            </div>
+
+            {/* Decorative Gradient Orbs */}
+            <div className="absolute top-0 right-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-red-300/20 to-orange-300/30 blur-3xl z-0"></div>
+            <div className="absolute bottom-0 left-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-tr from-blue-300/10 to-purple-300/20 blur-3xl z-0"></div>
+
+            <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -156,11 +195,12 @@ function ContactMethods() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
                             whileHover={{ y: -8, scale: 1.02 }}
-                            className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-8 shadow-lg transition-all hover:border-red-300 hover:shadow-2xl"
+                            className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/70 p-8 shadow-xl backdrop-blur-xl transition-all hover:border-red-300 hover:bg-white/80 hover:shadow-2xl"
                         >
-                            {/* Gradient Background on Hover */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${method.color} opacity-0 transition-opacity duration-300 group-hover:opacity-5`}></div>
-                            
+                            {/* Glass effect layers */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent opacity-50"></div>
+                            <div className={`absolute inset-0 bg-gradient-to-br ${method.color} opacity-0 transition-opacity duration-300 group-hover:opacity-10`}></div>
+
                             <div className="relative">
                                 <div className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${method.color} shadow-lg`}>
                                     <method.icon className="h-7 w-7 text-white" />
@@ -217,8 +257,32 @@ function ContactFormAndInfo() {
     };
 
     return (
-        <section id="office-info" className="relative bg-white py-20 sm:py-28">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <section id="office-info" className="relative overflow-hidden py-20 sm:py-28">
+            {/* Background with Heavy Glassmorphism Effect */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/image4.png"
+                    alt="Professional workspace background"
+                    fill
+                    className="object-cover opacity-30"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/98 via-slate-50/98 to-white/98"></div>
+                <div className="absolute inset-0 backdrop-blur-3xl"></div>
+            </div>
+
+            {/* Subtle Pattern Overlay */}
+            <div className="absolute inset-0 z-0 opacity-[0.03]">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 2px 2px, rgb(239 68 68) 1px, transparent 0)`,
+                    backgroundSize: '32px 32px'
+                }}></div>
+            </div>
+
+            {/* Decorative Gradient Orbs */}
+            <div className="absolute top-0 left-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-blue-300/20 to-cyan-300/30 blur-3xl z-0"></div>
+            <div className="absolute bottom-0 right-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-tr from-red-300/20 to-orange-300/30 blur-3xl z-0"></div>
+
+            <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
                     
                     {/* Form */}
@@ -377,9 +441,10 @@ function ContactFormAndInfo() {
                     >
                         {/* Office Hours & Details */}
                         <div className="space-y-6">
-                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
+                            <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 p-8 shadow-xl backdrop-blur-xl">
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent opacity-50"></div>
+                                <div className="relative flex items-center gap-3 mb-6">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
                                         <Clock className="h-6 w-6 text-white" />
                                     </div>
                                     <h3 className="text-2xl font-bold text-slate-900">Office Hours</h3>
@@ -400,14 +465,15 @@ function ContactFormAndInfo() {
                                 </div>
                             </div>
 
-                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600">
+                            <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 p-8 shadow-xl backdrop-blur-xl">
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent opacity-50"></div>
+                                <div className="relative flex items-center gap-3 mb-6">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg">
                                         <Building className="h-6 w-6 text-white" />
                                     </div>
                                     <h3 className="text-2xl font-bold text-slate-900">Headquarters</h3>
                                 </div>
-                                <p className="text-base leading-relaxed text-slate-600">
+                                <p className="relative text-base leading-relaxed text-slate-600">
                                     Foxes Technology LLC<br />
                                     Cairo, Egypt<br />
                                     <a href="mailto:info@foxestechnology.com" className={`mt-3 inline-block font-semibold ${BRAND_TEXT_PRIMARY} hover:underline`}>
@@ -416,13 +482,15 @@ function ContactFormAndInfo() {
                                 </p>
                             </div>
 
-                            <div className="rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-red-50 to-white p-8">
-                                <div className="flex items-center gap-3 mb-4">
+                            <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 p-8 shadow-xl backdrop-blur-xl">
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent opacity-50"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-red-100/20 to-orange-100/10 opacity-0 transition-opacity hover:opacity-100"></div>
+                                <div className="relative flex items-center gap-3 mb-4">
                                     <CheckCircle className={`h-6 w-6 ${BRAND_TEXT_PRIMARY}`} />
                                     <h3 className="text-xl font-bold text-slate-900">Quick Response</h3>
                                 </div>
-                                <p className="text-base text-slate-600">
-                                    We guarantee a response to all inquiries within 24 hours during business days.
+                                <p className="relative text-base text-slate-600">
+                                    We guarantee a response to all Egyptian tourism operators within 24 hours during business days.
                                 </p>
                             </div>
                         </div>
@@ -437,22 +505,46 @@ function ContactFormAndInfo() {
 function FAQSection() {
     const faqs = [
         {
-            question: 'How quickly can I get started?',
-            answer: 'You can get started immediately after signing up. Our onboarding process takes less than 30 minutes.'
+            question: 'How quickly can Egyptian tour operators get started?',
+            answer: 'You can start digitizing your tours immediately after signing up. Our onboarding process for Egyptian operators takes less than 30 minutes, with Arabic and English support.'
         },
         {
-            question: 'Do you offer custom integrations?',
-            answer: 'Yes! We offer custom integrations with your existing systems. Contact our sales team to discuss your needs.'
+            question: 'Do you integrate with Egyptian payment systems?',
+            answer: 'Yes! We integrate with major Egyptian payment gateways and banking systems. We also support mobile payment processing perfect for on-site tour operations across Egypt.'
         },
         {
-            question: 'What support options are available?',
-            answer: 'We offer 24/7 email support, live chat during business hours, and dedicated account managers for enterprise clients.'
+            question: 'What support is available for Egyptian tourism businesses?',
+            answer: 'We offer 24/7 email support in Arabic and English, live chat during Cairo business hours (9AM-6PM EET), and dedicated account managers for Egyptian enterprise tour operators.'
         },
     ];
 
     return (
-        <section className="bg-gradient-to-b from-slate-50 to-white py-20 sm:py-28">
-            <div className="mx-auto max-w-4xl px-6 lg:px-8">
+        <section className="relative overflow-hidden py-20 sm:py-28">
+            {/* Background with Heavy Glassmorphism Effect */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/hero2.png"
+                    alt="Business consultation background"
+                    fill
+                    className="object-cover opacity-30"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-50/98 via-white/98 to-slate-50/98"></div>
+                <div className="absolute inset-0 backdrop-blur-3xl"></div>
+            </div>
+
+            {/* Subtle Pattern Overlay */}
+            <div className="absolute inset-0 z-0 opacity-[0.03]">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 2px 2px, rgb(239 68 68) 1px, transparent 0)`,
+                    backgroundSize: '32px 32px'
+                }}></div>
+            </div>
+
+            {/* Decorative Gradient Orbs */}
+            <div className="absolute top-0 left-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-purple-300/20 to-pink-300/30 blur-3xl z-0"></div>
+            <div className="absolute bottom-0 right-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-tr from-blue-300/20 to-cyan-300/30 blur-3xl z-0"></div>
+
+            <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -475,10 +567,14 @@ function FAQSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-red-300 hover:shadow-md"
+                            className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 p-6 shadow-xl backdrop-blur-xl transition-all hover:border-red-300 hover:bg-white/80 hover:shadow-2xl"
                         >
-                            <h3 className="text-lg font-bold text-slate-900">{faq.question}</h3>
-                            <p className="mt-2 text-slate-600">{faq.answer}</p>
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent opacity-50"></div>
+                            <div className="absolute inset-0 bg-gradient-to-br from-red-100/20 to-orange-100/10 opacity-0 transition-opacity group-hover:opacity-100"></div>
+                            <div className="relative">
+                                <h3 className="text-lg font-bold text-slate-900">{faq.question}</h3>
+                                <p className="mt-2 text-slate-600">{faq.answer}</p>
+                            </div>
                         </motion.div>
                     ))}
                 </div>

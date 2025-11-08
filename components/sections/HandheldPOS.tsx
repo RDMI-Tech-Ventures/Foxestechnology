@@ -16,7 +16,7 @@ export default function HandheldPOS() {
       {/* Background with Heavy Glassmorphism Effect */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80"
+          src="/hero2.png"
           alt="Modern business background"
           fill
           className="object-cover opacity-30"
