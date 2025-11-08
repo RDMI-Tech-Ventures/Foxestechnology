@@ -92,16 +92,32 @@ export default function Solutions() {
     };
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 sm:py-28">
-            <div className="absolute inset-0 opacity-5">
+        <section className="relative overflow-hidden py-20 sm:py-28">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/hero2.png"
+                    alt="Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-slate-900/90 to-slate-950/95"></div>
+                <div className="absolute inset-0 backdrop-blur-sm"></div>
+            </div>
+
+            {/* Pattern Overlay */}
+            <div className="absolute inset-0 z-0 opacity-10">
                 <div className="absolute inset-0" style={{
                     backgroundImage: 'radial-gradient(circle at 2px 2px, rgb(239 68 68) 1px, transparent 0)',
                     backgroundSize: '48px 48px'
                 }}></div>
             </div>
 
-            <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"></div>
-            <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
+            {/* Gradient Blur Orbs */}
+            <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-red-500/20 blur-3xl z-0"></div>
+            <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl z-0"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl z-0"></div>
 
             <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
 
@@ -112,21 +128,23 @@ export default function Solutions() {
                     viewport={{ once: true }}
                     className="text-center"
                 >
-                    <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-950/50 px-5 py-2.5 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-950/40 px-5 py-2.5 backdrop-blur-xl shadow-lg">
                         <CheckCircle className="h-4 w-4 text-red-400" />
                         <span className="text-sm font-bold text-white">Complete Solution Suite</span>
                     </div>
 
-                    <h2 className="mt-6 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                        Everything You Need
+                    <h2 className="mt-6 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-2xl"
+                        style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.7)' }}>
+                        Transform Egyptian Tourism
                         <span className="block bg-gradient-to-r from-red-500 via-red-400 to-orange-500 bg-clip-text text-transparent">
-                            In One Platform
+                            With Our Complete Suite
                         </span>
                     </h2>
 
-                    <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-300 lg:text-xl">
-                        From online bookings to in-person sales, AI automation to analytics—manage your
-                        entire operation with one powerful platform.
+                    <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-200 lg:text-xl"
+                       style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)' }}>
+                        From online bookings to AI-powered insights—everything Egyptian tour operators need
+                        to compete globally, all in one powerful platform.
                     </p>
                 </motion.div>
 
@@ -148,10 +166,10 @@ export default function Solutions() {
                                         onClick={() => setActiveTab(index)}
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className={`group relative flex flex-shrink-0 items-center gap-3 rounded-2xl px-6 py-4 text-left transition-all ${
+                                        className={`group relative flex flex-shrink-0 items-center gap-3 rounded-2xl px-6 py-4 text-left transition-all backdrop-blur-xl ${
                                             activeTab === index
-                                                ? 'bg-white text-slate-900 shadow-xl ring-2 ring-red-500'
-                                                : 'border-2 border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/10'
+                                                ? 'bg-white/95 text-slate-900 shadow-2xl ring-2 ring-red-500 shadow-red-500/20'
+                                                : 'border-2 border-white/20 bg-white/10 text-white hover:border-white/30 hover:bg-white/20 shadow-lg'
                                         }`}
                                         style={{ scrollSnapAlign: 'center' }}
                                     >
@@ -180,18 +198,18 @@ export default function Solutions() {
                         <button
                             onClick={handlePrevious}
                             disabled={activeTab === 0}
-                            className="-ml-6 flex h-12 w-12 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="-ml-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-xl shadow-xl transition-all hover:border-white/50 hover:bg-white/20 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
                         >
-                            <ChevronLeft className="h-6 w-6 text-white" />
+                            <ChevronLeft className="h-6 w-6 text-white drop-shadow-lg" />
                         </button>
                     </div>
                     <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 lg:block">
                         <button
                             onClick={handleNext}
                             disabled={activeTab === solutionsData.length - 1}
-                            className="-mr-6 flex h-12 w-12 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="-mr-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-xl shadow-xl transition-all hover:border-white/50 hover:bg-white/20 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
                         >
-                            <ChevronRight className="h-6 w-6 text-white" />
+                            <ChevronRight className="h-6 w-6 text-white drop-shadow-lg" />
                         </button>
                     </div>
                 </div>
@@ -200,12 +218,18 @@ export default function Solutions() {
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTab}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.4 }}
-                            className="overflow-hidden rounded-3xl border-2 border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-8 backdrop-blur-xl lg:p-12"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.5 }}
+                            className="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/5 p-8 backdrop-blur-2xl shadow-2xl lg:p-12"
                         >
+                            {/* Glassmorphism inner glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-50"></div>
+                            <div className="absolute inset-0 bg-gradient-to-tl from-red-500/5 via-transparent to-blue-500/5"></div>
+
+                            {/* Content wrapper */}
+                            <div className="relative z-10">
                             <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
                                 <div className="order-2 lg:order-1">
@@ -218,11 +242,13 @@ export default function Solutions() {
                                         );
                                     })()}
 
-                                    <h3 className="mt-6 text-3xl font-black text-white lg:text-4xl">
+                                    <h3 className="mt-6 text-3xl font-black text-white lg:text-4xl drop-shadow-lg"
+                                        style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)' }}>
                                         {solutionsData[activeTab].title}
                                     </h3>
 
-                                    <p className="mt-4 text-lg leading-relaxed text-gray-300">
+                                    <p className="mt-4 text-lg leading-relaxed text-gray-100"
+                                       style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)' }}>
                                         {solutionsData[activeTab].description}
                                     </p>
 
@@ -236,11 +262,14 @@ export default function Solutions() {
                                                 className="flex items-start gap-3"
                                             >
                                                 <div className="flex-shrink-0">
-                                                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500/20">
-                                                        <CheckCircle className="h-4 w-4 text-green-400" />
+                                                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500/30 backdrop-blur-sm ring-1 ring-green-400/30">
+                                                        <CheckCircle className="h-4 w-4 text-green-400 drop-shadow-lg" />
                                                     </div>
                                                 </div>
-                                                <span className="text-base font-medium text-gray-200">{feature}</span>
+                                                <span className="text-base font-medium text-gray-100"
+                                                      style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}>
+                                                    {feature}
+                                                </span>
                                             </motion.li>
                                         ))}
                                     </ul>
@@ -249,10 +278,11 @@ export default function Solutions() {
                                         <motion.button
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-red-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-red-700"
+                                            className="group relative mt-8 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-red-600 to-red-700 px-8 py-4 text-base font-bold text-white shadow-2xl shadow-red-500/30 transition-all hover:shadow-red-500/50"
                                         >
-                                            <span>Learn More</span>
-                                            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                            <span className="relative z-10">Learn More</span>
+                                            <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-600 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                         </motion.button>
                                     </Link>
                                 </div>
@@ -262,7 +292,7 @@ export default function Solutions() {
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 0.5 }}
-                                        className="relative aspect-[4/3] overflow-hidden rounded-2xl border-2 border-white/10 shadow-2xl"
+                                        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/30 shadow-2xl backdrop-blur-sm"
                                     >
                                         <Image
                                             src={solutionsData[activeTab].image}
@@ -272,9 +302,11 @@ export default function Solutions() {
                                             sizes="(max-width: 1024px) 100vw, 50vw"
                                         />
 
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent"></div>
+                                        <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-2xl"></div>
                                     </motion.div>
                                 </div>
+                            </div>
                             </div>
                         </motion.div>
                     </AnimatePresence>
@@ -285,10 +317,10 @@ export default function Solutions() {
                         <button
                             key={index}
                             onClick={() => setActiveTab(index)}
-                            className={`h-2 rounded-full transition-all ${
+                            className={`h-2 rounded-full transition-all backdrop-blur-xl ${
                                 activeTab === index
-                                    ? 'w-8 bg-red-600'
-                                    : 'w-2 bg-white/30 hover:bg-white/50'
+                                    ? 'w-8 bg-gradient-to-r from-red-500 to-orange-500 shadow-lg shadow-red-500/50'
+                                    : 'w-2 bg-white/30 hover:bg-white/50 border border-white/20'
                             }`}
                             aria-label={`Go to solution ${index + 1}`}
                         />

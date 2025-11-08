@@ -67,7 +67,7 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-gradient-to-b from-black/30 via-black/20 to-transparent backdrop-blur-3xl shadow-2xl shadow-black/20 border-b border-white/5'
+            ? 'bg-gradient-to-b from-black/50 via-black/30 to-transparent backdrop-blur-2xl shadow-2xl shadow-black/20 border-b border-white/10'
             : 'bg-transparent'
         }`}
       >
@@ -91,12 +91,8 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`group relative px-4 py-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
-                    isScrolled 
-                      ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20' 
-                      : 'text-white hover:bg-white/10 drop-shadow-lg'
-                  }`}
-                  style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
+                  className="group relative px-4 py-2 text-sm font-bold tracking-tight text-white transition-all rounded-lg hover:bg-white/10 drop-shadow-lg"
+                  style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
                 >
                   {link.label}
                   <span className={`absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 ${BRAND_COLOR_PRIMARY} transition-all duration-300 group-hover:w-1/2`}></span>
@@ -108,24 +104,16 @@ export default function Header() {
             <div className="hidden lg:flex items-center gap-3">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className={`p-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
-                  isScrolled
-                    ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20'
-                    : 'text-white hover:bg-white/10 drop-shadow-lg'
-                }`}
-                style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
+                className="p-2 text-sm font-bold tracking-tight text-white transition-all rounded-lg hover:bg-white/10 drop-shadow-lg"
+                style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
                 aria-label="Search"
               >
                 <Search className="h-5 w-5" />
               </button>
               <Link
                 href="/login"
-                className={`px-4 py-2 text-sm font-bold tracking-tight transition-all rounded-lg ${
-                  isScrolled
-                    ? 'text-slate-900 hover:text-slate-900 hover:bg-white/20'
-                    : 'text-white hover:bg-white/10 drop-shadow-lg'
-                }`}
-                style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
+                className="px-4 py-2 text-sm font-bold tracking-tight text-white transition-all rounded-lg hover:bg-white/10 drop-shadow-lg"
+                style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
               >
                 Log in
               </Link>
@@ -142,12 +130,8 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-xl transition-all ${
-                isScrolled 
-                  ? 'hover:bg-white/20 text-slate-900' 
-                  : 'hover:bg-white/10 text-white drop-shadow-lg'
-              }`}
-              style={!isScrolled ? { textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' } : {}}
+              className="lg:hidden p-2 rounded-xl transition-all hover:bg-white/10 text-white drop-shadow-lg"
+              style={{ textShadow: '0 1px 5px rgba(0, 0, 0, 0.5)' }}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (

@@ -2,8 +2,10 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
+import { Smartphone, Zap } from 'lucide-react';
 
 export default function MobileApps() {
   const ref = useRef(null);
@@ -34,49 +36,79 @@ export default function MobileApps() {
   };
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-white py-20 lg:py-32">
-      {/* Subtle Background Decoration */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-orange-50/40 blur-3xl" />
-        <div className="absolute right-1/4 bottom-20 h-96 w-96 rounded-full bg-teal-50/30 blur-3xl" />
+    <section ref={ref} className="relative overflow-hidden py-20 lg:py-32">
+      {/* Background with Heavy Glassmorphism Effect */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80"
+          alt="Mobile technology background"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-teal-50/98 via-white/98 to-orange-50/98"></div>
+        <div className="absolute inset-0 backdrop-blur-3xl"></div>
       </div>
 
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      {/* Subtle Pattern Overlay */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgb(20 184 166) 1px, transparent 0)`,
+          backgroundSize: '32px 32px'
+        }}></div>
+      </div>
+
+      {/* Decorative Gradient Orbs */}
+      <div className="absolute top-0 left-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-teal-300/30 to-cyan-300/20 blur-3xl z-0"></div>
+      <div className="absolute bottom-0 right-0 h-[32rem] w-[32rem] rounded-full bg-gradient-to-tr from-orange-300/20 to-amber-300/30 blur-3xl z-0"></div>
+
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           className="text-center"
         >
+          {/* Badge with Enhanced Glass */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-300/50 bg-teal-100/60 px-5 py-2.5 shadow-lg backdrop-blur-xl"
+          >
+            <Smartphone className="h-5 w-5 text-teal-600" />
+            <span className="text-sm font-bold text-teal-900">Mobile Business Management</span>
+          </motion.div>
+
           {/* Title */}
           <motion.h2
             variants={itemVariants}
-            className="mb-8 text-5xl font-bold text-[#E77724] sm:text-6xl lg:text-7xl"
+            className="mb-8 text-4xl font-black leading-tight text-slate-900 sm:text-5xl lg:text-6xl"
           >
-            Mobile Apps
+            Manage Your Egyptian{' '}
+            <span className="block mt-2 bg-gradient-to-r from-teal-600 via-cyan-600 to-orange-600 bg-clip-text text-transparent">
+              Tours from Anywhere
+            </span>
           </motion.h2>
 
           {/* Description */}
         <motion.p
   variants={itemVariants}
-  className="mx-auto mb-16 max-w-4xl text-lg leading-relaxed text-slate-700 sm:text-xl lg:text-2xl"
+  className="mx-auto mb-16 max-w-4xl text-lg leading-relaxed text-slate-700 lg:text-xl"
 >
-  Take control of your tour business from anywhere. The{' '}
-  <span className="font-semibold text-slate-900">Foxes Technology App</span>{' '}
-  puts complete booking management, payment processing, and real-time analytics
-  at your fingertips. Run your business on the move—freedom has never felt so
-  powerful.
+  Take control of your Egyptian tour business from Cairo to Aswan. The{' '}
+  <span className="font-bold text-slate-900">Foxes Technology App</span>{' '}
+  delivers complete booking management, mobile payment processing, and real-time analytics
+  on your phone—manage operations from Luxor temple tours to Red Sea excursions, anytime, anywhere.
 </motion.p>
 
           {/* Available On Label */}
           <motion.h3
             variants={itemVariants}
-            className="mb-12 text-3xl font-bold text-slate-900 sm:text-4xl"
+            className="mb-12 text-2xl font-black text-slate-900 sm:text-3xl"
           >
-            Available on
+            Download Now
           </motion.h3>
 
-          {/* App Store Badges */}
+          {/* App Store Badges with Glass Effect */}
           <motion.div
             variants={itemVariants}
             className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8"
@@ -92,8 +124,9 @@ export default function MobileApps() {
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="h-16 w-56 overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-2xl sm:h-20 sm:w-64"
+                className="relative h-16 w-56 overflow-hidden rounded-xl border border-white/60 shadow-2xl backdrop-blur-xl transition-shadow duration-300 group-hover:shadow-2xl group-hover:border-teal-300 sm:h-20 sm:w-64"
               >
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent"></div>
                 <GooglePlayBadge />
               </motion.div>
             </Link>
@@ -109,8 +142,9 @@ export default function MobileApps() {
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="h-16 w-56 overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-2xl sm:h-20 sm:w-64"
+                className="relative h-16 w-56 overflow-hidden rounded-xl border border-white/60 shadow-2xl backdrop-blur-xl transition-shadow duration-300 group-hover:shadow-2xl group-hover:border-teal-300 sm:h-20 sm:w-64"
               >
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent"></div>
                 <AppStoreBadge />
               </motion.div>
             </Link>
@@ -121,24 +155,30 @@ export default function MobileApps() {
             variants={itemVariants}
             className="mt-16 hidden lg:block"
           >
-            <p className="mb-6 text-sm font-medium text-slate-500">
+            <p className="mb-6 text-sm font-bold text-slate-700">
               Scan to download
             </p>
             <div className="flex items-center justify-center gap-12">
               {/* Android QR */}
               <div className="text-center">
-                <div className="mb-3 inline-block rounded-xl border-2 border-slate-200 bg-white p-3 shadow-md">
-                  <QRCodePlaceholder />
+                <div className="relative mb-3 inline-block overflow-hidden rounded-xl border border-white/60 bg-white/80 p-3 shadow-2xl backdrop-blur-xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent"></div>
+                  <div className="relative">
+                    <QRCodePlaceholder />
+                  </div>
                 </div>
-                <div className="text-xs font-medium text-slate-600">Android</div>
+                <div className="text-sm font-bold text-slate-900">Android</div>
               </div>
 
               {/* iOS QR */}
               <div className="text-center">
-                <div className="mb-3 inline-block rounded-xl border-2 border-slate-200 bg-white p-3 shadow-md">
-                  <QRCodePlaceholder />
+                <div className="relative mb-3 inline-block overflow-hidden rounded-xl border border-white/60 bg-white/80 p-3 shadow-2xl backdrop-blur-xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent"></div>
+                  <div className="relative">
+                    <QRCodePlaceholder />
+                  </div>
                 </div>
-                <div className="text-xs font-medium text-slate-600">iOS</div>
+                <div className="text-sm font-bold text-slate-900">iOS</div>
               </div>
             </div>
           </motion.div>
@@ -146,7 +186,7 @@ export default function MobileApps() {
       </div>
 
       {/* Bottom Accent Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#E77724] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-teal-500 to-transparent opacity-50" />
     </section>
   );
 }
