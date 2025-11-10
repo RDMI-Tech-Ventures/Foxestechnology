@@ -217,7 +217,7 @@ export default function Footer() {
 
   const resourcesLinks = [
     { name: 'Documentation', href: '/docs' },
-    { name: 'API Reference', href: '/api-reference' },
+    { name: 'API Reference', href: '/api' },
     { name: 'Support Center', href: '/support' },
     { name: 'Get Started', href: '/get-started' },
   ];

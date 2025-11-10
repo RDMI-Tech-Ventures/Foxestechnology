@@ -226,6 +226,15 @@ export const searchableContent = [
     category: 'company',
     tags: ['careers', 'jobs', 'hiring', 'team', 'employment'],
   },
+  {
+    objectID: 'careers-apply',
+    title: 'Apply for a Job at Foxes Technology',
+    description: 'Submit your application to join our team',
+    content: 'Apply for open positions at Foxes Technology. Submit your resume, cover letter, and contact information. We are looking for talented engineers, designers, sales professionals, and more to build the future of travel technology.',
+    url: '/careers/apply',
+    category: 'company',
+    tags: ['apply', 'application', 'job application', 'careers', 'resume', 'submit'],
+  },
 
   // Resources
   {
@@ -241,10 +250,10 @@ export const searchableContent = [
     objectID: 'api-reference',
     title: 'API Reference',
     description: 'RESTful API documentation for custom integrations',
-    content: 'Complete API reference for Foxes Technology software. Includes Bookings API, Payments API, Customers API, Inventory API, Analytics API, and Webhooks. RESTful design with unlimited API calls and comprehensive SDKs in JavaScript, Python, PHP, and Ruby.',
-    url: '/api-reference',
+    content: 'Complete API v2.0 reference for Foxes Technology booking platform. Authentication, Activities API, Bookings API, Payments API, Contacts API, Settings API. RESTful endpoints with code examples in cURL, JavaScript, Python, and PHP. API key authentication, HTTPS encrypted, UNIX Epoch time format. Rate limits available.',
+    url: '/api',
     category: 'resources',
-    tags: ['api', 'reference', 'rest', 'webhooks', 'sdk', 'integration', 'development'],
+    tags: ['api', 'reference', 'rest', 'webhooks', 'sdk', 'integration', 'development', 'endpoints', 'authentication'],
   },
   {
     objectID: 'support-center',

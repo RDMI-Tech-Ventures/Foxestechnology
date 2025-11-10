@@ -323,13 +323,13 @@ function Timeline() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 viewport={{ once: true }}
-                                className={`relative flex flex-col lg:flex-row ${index % 2 === 0 ? 'lg:flex-row-reverse' : ''} items-center gap-8`}
+                                className="relative flex flex-col lg:flex-row items-center gap-8"
                             >
                                 {/* Timeline Dot */}
                                 <div className="absolute left-1/2 top-8 z-10 hidden h-6 w-6 -translate-x-1/2 rounded-full bg-red-600 ring-4 ring-white shadow-lg lg:block"></div>
 
                                 {/* Content Card */}
-                                <div className={`w-full lg:w-5/12 ${index % 2 === 0 ? '' : 'lg:ml-auto'}`}>
+                                <div className={`w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto lg:pr-8' : 'lg:ml-auto lg:pl-8'}`}>
                                     <div className="group rounded-2xl border-2 border-slate-200 bg-white p-8 shadow-lg transition-all hover:border-red-300 hover:shadow-2xl">
                                         <div className="flex items-start gap-4">
                                             <div className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl ${BRAND_COLOR_PRIMARY} shadow-md`}>
@@ -353,10 +353,10 @@ function Timeline() {
 
 // 6. Enhanced Team Section
 const teamMembers = [
-    { name: "Fouad Elshazly", title: "Founder & CEO", image: "/images/team/fouad-elshazly.jpg", bio: "15+ years in travel technology" },
-    { name: "Sarah Ahmed", title: "Head of Product", image: "/images/team/placeholder-01.jpg", bio: "Former Product Lead at Booking.com" },
-    { name: "Mohammed Ali", title: "Lead Engineer", image: "/images/team/placeholder-02.jpg", bio: "Ex-Amazon Software Architect" },
-    { name: "Layla Hassan", title: "Head of Customer Success", image: "/images/team/placeholder-03.jpg", bio: "Tourism industry veteran" },
+    { name: "Fouad Elshazly", title: "Founder & CEO", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop", bio: "15+ years in travel technology" },
+    { name: "Sarah Ahmed", title: "Head of Product", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=800&fit=crop", bio: "Former Product Lead at Booking.com" },
+    { name: "Mohammed Ali", title: "Lead Engineer", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=800&fit=crop", bio: "Ex-Amazon Software Architect" },
+    { name: "Layla Hassan", title: "Head of Customer Success", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=800&fit=crop", bio: "Tourism industry veteran" },
 ];
 
 function TeamSection() {
