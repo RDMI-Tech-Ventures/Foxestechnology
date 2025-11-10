@@ -1,7 +1,6 @@
 // app/layout.tsx
 import { Inter, Poppins } from 'next/font/google';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import ConditionalLayout from '@/components/ConditionalLayout';
 import './globals.css';
 import type { Metadata } from 'next';
 
@@ -53,11 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} font-inter bg-white text-slate-800 antialiased`}>
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   );
