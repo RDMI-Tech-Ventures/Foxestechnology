@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft, Briefcase, Mail, Phone, User, FileText, Upload, Send, CheckCircle } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 const BRAND_COLOR_PRIMARY = "bg-red-600";
 
-export default function ApplyPage() {
+function ApplyPageContent() {
     const searchParams = useSearchParams();
     const positionTitle = searchParams.get('position') || 'Position';
 
@@ -352,5 +352,20 @@ export default function ApplyPage() {
                 </div>
             </section>
         </main>
+    );
+}
+
+export default function ApplyPage() {
+    return (
+        <Suspense fallback={
+            <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-600 border-r-transparent"></div>
+                    <p className="mt-4 text-slate-600">Loading application form...</p>
+                </div>
+            </main>
+        }>
+            <ApplyPageContent />
+        </Suspense>
     );
 }
