@@ -3,10 +3,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import ExitIntentModal from '@/components/ExitIntentModal';
 
 export default function ComingSoonPage() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showExitIntent, setShowExitIntent] = useState(false);
+  const [hasShownExitIntent, setHasShownExitIntent] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -33,6 +36,28 @@ export default function ComingSoonPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Exit intent detection
+  useEffect(() => {
+    const handleMouseLeave = (e: MouseEvent) => {
+      // Check if mouse is leaving from the top of the viewport
+      // and hasn't been shown before and user hasn't already submitted
+      if (e.clientY <= 0 && !hasShownExitIntent && !isSubmitted) {
+        setShowExitIntent(true);
+        setHasShownExitIntent(true);
+      }
+    };
+
+    // Add a small delay before enabling exit intent (let user see the page first)
+    const timer = setTimeout(() => {
+      document.addEventListener('mouseleave', handleMouseLeave);
+    }, 5000); // Wait 5 seconds before enabling exit intent
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [hasShownExitIntent, isSubmitted]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
@@ -42,7 +67,19 @@ export default function ComingSoonPage() {
     }, 5000);
   };
 
+  const handleExitIntentEmailSubmit = (email: string) => {
+    console.log('Exit intent email submitted:', email);
+    // Here you would normally send this to your backend/email service
+  };
+
   return (
+    <>
+      {/* Exit Intent Modal */}
+      <ExitIntentModal
+        isOpen={showExitIntent}
+        onClose={() => setShowExitIntent(false)}
+        onEmailSubmit={handleExitIntentEmailSubmit}
+      />
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center px-4 py-8 relative overflow-hidden">
       {/* Background Image with Glassmorphism */}
       <div className="absolute inset-0">
@@ -165,7 +202,7 @@ export default function ComingSoonPage() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-8"
+          className="mb-8 relative"
         >
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent">
             Coming Soon
@@ -445,5 +482,6 @@ export default function ComingSoonPage() {
         </motion.div>
       </div>
     </div>
+    </>
   );
 }
