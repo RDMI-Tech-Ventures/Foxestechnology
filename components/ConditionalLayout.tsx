@@ -12,7 +12,7 @@ export default function ConditionalLayout({
   const pathname = usePathname();
 
   // Pages that should NOT have header and footer
-  const noLayoutPages = ['/coming-soon'];
+  const noLayoutPages = ['/', '/coming-soon'];
 
   const shouldShowLayout = !noLayoutPages.includes(pathname);
 
