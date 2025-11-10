@@ -272,14 +272,14 @@ export default function ComingSoonPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.3 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
           className="max-w-xl mx-auto mb-20"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Get Notified at Launch
+            Reserve Your Spot for Launch Day
           </h3>
           <p className="text-slate-400 mb-6">
-            Be the first to know when we go live. Join our waiting list.
+            Get exclusive early access and launch updates on December 31st, 2025.
           </p>
 
           <form onSubmit={handleSubmit} className="relative">
@@ -333,7 +333,7 @@ export default function ComingSoonPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Thank you! We'll notify you when we launch.
+                  You're all set! We'll send you updates before December 31st, 2025.
                 </p>
               </motion.div>
             )}
@@ -344,7 +344,7 @@ export default function ComingSoonPage() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          transition={{ duration: 0.8, delay: 1.6 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16"
         >
           {[
@@ -383,7 +383,7 @@ export default function ComingSoonPage() {
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.7 + index * 0.1 }}
+              transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
               className="relative group"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-50`} />
@@ -410,7 +410,7 @@ export default function ComingSoonPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2 }}
+          transition={{ duration: 0.8, delay: 2.1 }}
           className="text-slate-400 space-y-4"
         >
           <p className="text-lg">

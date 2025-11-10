@@ -277,10 +277,10 @@ export default function ComingSoonContent() {
           className="max-w-xl mx-auto mb-20"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Get Notified at Launch
+            Reserve Your Spot for Launch Day
           </h3>
           <p className="text-slate-400 mb-6">
-            Be the first to know when we go live. Join our waiting list.
+            Get exclusive early access and launch updates on December 31st, 2025.
           </p>
 
           <form onSubmit={handleSubmit} className="relative">
@@ -334,7 +334,7 @@ export default function ComingSoonContent() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Thank you! We'll notify you when we launch.
+                  You're all set! We'll send you updates before December 31st, 2025.
                 </p>
               </motion.div>
             )}
