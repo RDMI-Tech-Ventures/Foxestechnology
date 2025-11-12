@@ -117,7 +117,7 @@ function HeroSection() {
                     >
                         <div className="relative rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-8 backdrop-blur-sm ring-1 ring-white/10">
                             <img
-                                src="/images/kiosk.jpg"
+                                src="/kiosk3.png"
                                 alt="Self-Service Kiosk"
                                 className="rounded-xl shadow-2xl"
                                 onError={(e) => {

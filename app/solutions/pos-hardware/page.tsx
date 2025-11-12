@@ -119,7 +119,7 @@ function HeroSection() {
                     >
                         <div className="relative rounded-2xl bg-gradient-to-br from-red-500/20 to-orange-500/20 p-8 backdrop-blur-sm ring-1 ring-white/10">
                             <img
-                                src="/images/pos-device.jpg"
+                                src="/pos2.png"
                                 alt="POS Hardware"
                                 className="rounded-xl shadow-2xl"
                                 onError={(e) => {
@@ -139,21 +139,21 @@ function DeviceShowcase() {
         {
             name: 'Handheld POS',
             icon: Smartphone,
-            image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&auto=format&fit=crop',
+            image: '/mobile-pos.png',
             features: ['Compact & portable', 'Built-in scanner', 'Card reader', '8-hour battery'],
             price: 'From $399'
         },
         {
             name: 'Tablet POS',
             icon: Tablet,
-            image: 'https://images.unsplash.com/photo-1544244015-9c72fd9c866d?w=400&auto=format&fit=crop',
+            image: '/tablet-pos.png',
             features: ['10" touch screen', 'Stand included', 'Dual cameras', 'Premium design'],
             price: 'From $699'
         },
         {
             name: 'Terminal POS',
             icon: Package,
-            image: 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&auto=format&fit=crop',
+            image: '/terminal.png',
             features: ['Full keyboard', 'Receipt printer', 'Cash drawer', 'Rugged build'],
             price: 'From $1,299'
         },

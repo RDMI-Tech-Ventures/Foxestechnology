@@ -97,6 +97,7 @@ export default function ComingSoonPage() {
 
       {/* Animated background elements with improved motion */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Large gradient blobs */}
         <motion.div
           className="absolute -top-40 -left-40 w-96 h-96 bg-red-600/20 rounded-full blur-3xl"
           animate={{
@@ -138,52 +139,422 @@ export default function ComingSoonPage() {
             ease: [0.45, 0.05, 0.55, 0.95],
           }}
         />
-        {/* Additional floating particles for premium feel */}
+
+        {/* Geometric Shapes - Floating Triangles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`triangle-${i}`}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -200, 0],
+              x: [0, Math.random() * 100 - 50, 0],
+              rotate: [0, 360],
+              opacity: [0, 0.6, 0],
+            }}
+            transition={{
+              duration: 15 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 2,
+            }}
+          >
+            <div
+              className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[25px]"
+              style={{
+                borderBottomColor: i % 3 === 0 ? 'rgba(220, 38, 38, 0.3)' : i % 3 === 1 ? 'rgba(37, 99, 235, 0.3)' : 'rgba(168, 85, 247, 0.3)',
+              }}
+            />
+          </motion.div>
+        ))}
+
+        {/* Floating Circles */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={`circle-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${10 + Math.random() * 30}px`,
+              height: `${10 + Math.random() * 30}px`,
+              background: i % 4 === 0 ? 'rgba(220, 38, 38, 0.2)' : i % 4 === 1 ? 'rgba(37, 99, 235, 0.2)' : i % 4 === 2 ? 'rgba(168, 85, 247, 0.2)' : 'rgba(251, 191, 36, 0.2)',
+              border: '1px solid',
+              borderColor: i % 4 === 0 ? 'rgba(220, 38, 38, 0.4)' : i % 4 === 1 ? 'rgba(37, 99, 235, 0.4)' : i % 4 === 2 ? 'rgba(168, 85, 247, 0.4)' : 'rgba(251, 191, 36, 0.4)',
+            }}
+            animate={{
+              y: [0, -150 - Math.random() * 100, 0],
+              x: [0, Math.random() * 80 - 40, 0],
+              scale: [1, 1.5, 1],
+              opacity: [0, 0.8, 0],
+            }}
+            transition={{
+              duration: 12 + Math.random() * 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 1.5,
+            }}
+          />
+        ))}
+
+        {/* Rotating Squares */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`square-${i}`}
+            className="absolute border-2"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${20 + Math.random() * 40}px`,
+              height: `${20 + Math.random() * 40}px`,
+              borderColor: i % 3 === 0 ? 'rgba(220, 38, 38, 0.3)' : i % 3 === 1 ? 'rgba(37, 99, 235, 0.3)' : 'rgba(168, 85, 247, 0.3)',
+            }}
+            animate={{
+              y: [0, -180, 0],
+              x: [0, Math.random() * 60 - 30, 0],
+              rotate: [0, 360],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 20 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 3,
+            }}
+          />
+        ))}
+
+        {/* Hexagons */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`hex-${i}`}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -220, 0],
+              x: [0, Math.random() * 50 - 25, 0],
+              rotate: [0, -360],
+              opacity: [0, 0.4, 0],
+              scale: [0.8, 1.2, 0.8],
+            }}
+            transition={{
+              duration: 25 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 4,
+            }}
+          >
+            <svg width="40" height="40" viewBox="0 0 40 40">
+              <polygon
+                points="20,2 35,11 35,29 20,38 5,29 5,11"
+                fill="none"
+                stroke={i % 3 === 0 ? 'rgba(220, 38, 38, 0.4)' : i % 3 === 1 ? 'rgba(37, 99, 235, 0.4)' : 'rgba(168, 85, 247, 0.4)'}
+                strokeWidth="2"
+              />
+            </svg>
+          </motion.div>
+        ))}
+
+        {/* Glowing Lines */}
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={`line-${i}`}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: '2px',
+              height: `${30 + Math.random() * 80}px`,
+              background: `linear-gradient(to bottom, transparent, ${i % 3 === 0 ? 'rgba(220, 38, 38, 0.6)' : i % 3 === 1 ? 'rgba(37, 99, 235, 0.6)' : 'rgba(168, 85, 247, 0.6)'}, transparent)`,
+            }}
+            animate={{
+              y: [0, -300, 0],
+              opacity: [0, 1, 0],
+              scaleY: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 1.2,
+            }}
+          />
+        ))}
+
+        {/* Sparkle Stars */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={`star-${i}`}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              scale: [0, 1, 0],
+              rotate: [0, 180, 360],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12">
+              <path
+                d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"
+                fill={i % 4 === 0 ? 'rgba(220, 38, 38, 0.6)' : i % 4 === 1 ? 'rgba(37, 99, 235, 0.6)' : i % 4 === 2 ? 'rgba(168, 85, 247, 0.6)' : 'rgba(251, 191, 36, 0.6)'}
+              />
+            </svg>
+          </motion.div>
+        ))}
+
+        {/* Orbiting Particles */}
         <motion.div
-          className="absolute top-1/3 left-1/3 w-2 h-2 bg-red-500/40 rounded-full"
+          className="absolute top-1/2 left-1/2"
           animate={{
-            y: [0, -100, 0],
-            x: [0, 50, 0],
-            opacity: [0, 1, 0],
+            rotate: 360,
           }}
           transition={{
-            duration: 8,
+            duration: 30,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0,
+            ease: "linear",
           }}
-        />
+        >
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={`orbit-${i}`}
+              className="absolute w-3 h-3 rounded-full"
+              style={{
+                background: `radial-gradient(circle, ${i % 3 === 0 ? 'rgba(220, 38, 38, 0.8)' : i % 3 === 1 ? 'rgba(37, 99, 235, 0.8)' : 'rgba(168, 85, 247, 0.8)'} 0%, transparent 70%)`,
+                left: `${Math.cos((i * 2 * Math.PI) / 6) * 200}px`,
+                top: `${Math.sin((i * 2 * Math.PI) / 6) * 200}px`,
+              }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.6, 1, 0.6],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </motion.div>
+
+        {/* Wave Pattern */}
         <motion.div
-          className="absolute top-2/3 right-1/3 w-1.5 h-1.5 bg-blue-400/40 rounded-full"
+          className="absolute bottom-0 left-0 right-0 h-32 opacity-20"
           animate={{
-            y: [0, -80, 0],
-            x: [0, -40, 0],
-            opacity: [0, 1, 0],
+            backgroundPosition: ['0% 0%', '100% 0%'],
           }}
           transition={{
-            duration: 10,
+            duration: 20,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
+            ease: "linear",
           }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 left-1/4 w-1 h-1 bg-purple-400/40 rounded-full"
-          animate={{
-            y: [0, -60, 0],
-            x: [0, 30, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
+          style={{
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(220, 38, 38, 0.1) 50px, rgba(220, 38, 38, 0.1) 100px)',
+            backgroundSize: '200% 100%',
           }}
         />
       </div>
 
       <div className="max-w-6xl mx-auto text-center relative z-10 w-full">
+        {/* 3D Morphing Shapes in Background */}
+        <motion.div
+          className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 opacity-10"
+          animate={{
+            rotateX: [0, 360],
+            rotateY: [0, 360],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{
+            perspective: '1000px',
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <motion.div
+            className="w-full h-full border-4 border-red-500/20 rounded-3xl"
+            animate={{
+              borderRadius: ['30% 70% 70% 30% / 30% 30% 70% 70%', '70% 30% 30% 70% / 70% 70% 30% 30%', '30% 70% 70% 30% / 30% 30% 70% 70%'],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.div>
+
+        {/* Animated Corner Brackets */}
+        {[
+          { top: 0, left: 0, rotate: 0 },
+          { top: 0, right: 0, rotate: 90 },
+          { bottom: 0, right: 0, rotate: 180 },
+          { bottom: 0, left: 0, rotate: 270 },
+        ].map((pos, i) => (
+          <motion.div
+            key={`bracket-${i}`}
+            className="absolute w-24 h-24"
+            style={{ ...pos }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.2,
+            }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <motion.path
+                d="M 0 30 L 0 0 L 30 0"
+                stroke="rgba(220, 38, 38, 0.4)"
+                strokeWidth="3"
+                fill="none"
+                strokeLinecap="round"
+                animate={{
+                  pathLength: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.2,
+                }}
+              />
+            </svg>
+          </motion.div>
+        ))}
+
+        {/* Floating Data Particles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`data-particle-${i}`}
+            className="absolute text-xs font-mono text-red-500/30"
+            style={{
+              left: `${10 + (i % 4) * 25}%`,
+              top: `${20 + Math.floor(i / 4) * 60}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0, 0.6, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+          >
+            {['01', '10', '11', '00'][i % 4]}
+          </motion.div>
+        ))}
+
+        {/* Floating Ring Decorations around content */}
+        <motion.div
+          className="absolute left-0 top-1/4 w-64 h-64 border-4 border-red-500/20 rounded-full"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute right-0 top-1/3 w-48 h-48 border-4 border-blue-500/20 rounded-full"
+          animate={{
+            rotate: [360, 0],
+            scale: [1.2, 1, 1.2],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute left-1/4 bottom-1/4 w-32 h-32 border-4 border-purple-500/20 rounded-full"
+          animate={{
+            rotate: [0, -360],
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* DNA Helix Style Animation */}
+        <motion.div className="absolute left-10 top-20 w-1 h-96">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={`dna-left-${i}`}
+              className="absolute w-2 h-2 bg-red-500/40 rounded-full"
+              style={{
+                top: `${i * 25}px`,
+              }}
+              animate={{
+                x: [0, 30, 0],
+                opacity: [0.4, 0.8, 0.4],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
+        <motion.div className="absolute right-10 top-20 w-1 h-96">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={`dna-right-${i}`}
+              className="absolute w-2 h-2 bg-blue-500/40 rounded-full"
+              style={{
+                top: `${i * 25}px`,
+              }}
+              animate={{
+                x: [0, -30, 0],
+                opacity: [0.4, 0.8, 0.4],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
+
         {/* Logo Image with enhanced animations */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: -50 }}
@@ -493,8 +864,43 @@ export default function ComingSoonPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="grid grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto mb-16"
+          className="grid grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto mb-16 relative"
         >
+          {/* Connecting Lines Between Timer Cards */}
+          <motion.div
+            className="absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-red-500/30 to-transparent"
+            animate={{
+              opacity: [0.3, 0.6, 0.3],
+              scaleX: [0.95, 1, 0.95],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          {/* Pulse Rings */}
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={`pulse-${i}`}
+              className="absolute w-16 h-16 border-2 border-red-500/30 rounded-full"
+              style={{
+                left: `${12.5 + i * 25}%`,
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+              animate={{
+                scale: [1, 2, 1],
+                opacity: [0.5, 0, 0.5],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: i * 0.75,
+              }}
+            />
+          ))}
           {[
             { value: timeLeft.days, label: 'Days', color: 'from-red-600/20' },
             { value: timeLeft.hours, label: 'Hours', color: 'from-orange-600/20' },
@@ -581,8 +987,38 @@ export default function ComingSoonPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="max-w-xl mx-auto mb-20"
+          className="max-w-xl mx-auto mb-20 relative"
         >
+          {/* Decorative Elements Around Form */}
+          <motion.div
+            className="absolute -left-20 top-0 w-16 h-16 border-2 border-red-500/20 rounded-lg"
+            animate={{
+              rotate: [0, 90, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute -right-20 bottom-0 w-12 h-12 border-2 border-blue-500/20"
+            style={{
+              clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+            }}
+            animate={{
+              rotate: [0, -90, 0],
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Reserve Your Spot for Launch Day
           </h3>
@@ -706,8 +1142,56 @@ export default function ComingSoonPage() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16 relative"
         >
+          {/* Geometric Grid Overlay */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(220, 38, 38, 0.15) 1px, transparent 0)',
+              backgroundSize: '40px 40px',
+            }}
+            animate={{
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* Connecting Nodes Animation */}
+          <motion.svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ zIndex: 0 }}
+          >
+            {[
+              { x1: '16%', y1: '50%', x2: '50%', y2: '50%' },
+              { x1: '50%', y1: '50%', x2: '84%', y2: '50%' },
+            ].map((line, i) => (
+              <motion.line
+                key={`connect-${i}`}
+                x1={line.x1}
+                y1={line.y1}
+                x2={line.x2}
+                y2={line.y2}
+                stroke="rgba(220, 38, 38, 0.2)"
+                strokeWidth="2"
+                strokeDasharray="5,5"
+                animate={{
+                  strokeDashoffset: [0, -10],
+                  opacity: [0.2, 0.5, 0.2],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: i * 0.5,
+                }}
+              />
+            ))}
+          </motion.svg>
           {[
             {
               icon: (
