@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "features": "Features",
+    "solutions": "Solutions",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "search": "Search",
+    "searchPlaceholder": "Search solutions, features, docs...",
+    "searchShortcut": "⌘K to search"
+  },
+  "home": {
+    "brandName": "Foxes Technology",
+    "comingSoon": "Coming Soon",
+    "tagline": "The ultimate booking and POS platform for tours & activities businesses in {egypt} and the {gcc}",
+    "egypt": "Egypt",
+    "gcc": "GCC region",
+    "launchDate": "Launching on {date}",
+    "launchDateValue": "December 31st, 2025",
+    "countdownDays": "Days",
+    "countdownHours": "Hours",
+    "countdownMinutes": "Minutes",
+    "countdownSeconds": "Seconds",
+    "reserveSpot": "Reserve Your Spot for Launch Day",
+    "earlyAccess": "Get exclusive early access and launch updates on December 31st, 2025.",
+    "emailPlaceholder": "Enter your email address",
+    "notifyMe": "Notify Me",
+    "subscribed": "Subscribed!",
+    "successMessage": "You're all set! We'll send you updates before December 31st, 2025.",
+    "features": {
+      "booking": {
+        "title": "Online Booking",
+        "description": "Seamless reservation system with real-time availability"
+      },
+      "pos": {
+        "title": "POS Hardware",
+        "description": "Modern point-of-sale solutions for your business"
+      },
+      "ai": {
+        "title": "AI-Powered",
+        "description": "Smart automation to streamline your operations"
+      }
+    },
+    "contact": "Questions? Contact us at {email}",
+    "email": "info@foxestechnology.com"
+  },
+  "footer": {
+    "tagline": "Transform your tour & activity business with the all-in-one booking and POS platform.",
+    "solutions": "Solutions",
+    "company": "Company",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "allRightsReserved": "All rights reserved.",
+    "builtFor": "Built for tour & activity operators in Egypt and the GCC region."
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "readMore": "Read More",
+    "close": "Close",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "meta": {
+    "defaultTitle": "Foxes Technology | Booking Systems & POS for Tours & Activities",
+    "defaultDescription": "Transform your tour & activity business with Foxes Technology. Get our all-in-one booking system, POS hardware, and AI solutions, built for operators in Egypt & the GCC.",
+    "comingSoonTitle": "Coming Soon - Foxes Technology | Transform Your Tour Business",
+    "comingSoonDescription": "Foxes Technology is launching soon! The ultimate booking system, POS hardware, and AI-powered solutions built exclusively for tours & activities operators in Egypt and the GCC region. Join our waitlist today."
+  }
+}
